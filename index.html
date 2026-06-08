@@ -12,8 +12,14 @@
 body{
   font-family:'Kanit',sans-serif;
   margin:0;
-  background:#f2f4f7;
   color:#2c3e50;
+
+  background:
+  radial-gradient(circle at top left,#6ea8ff 0%,transparent 35%),
+  radial-gradient(circle at bottom right,#7ed6a7 0%,transparent 35%),
+  #eef3ff;
+
+  min-height:100vh;
 }
 
 .container{
@@ -24,17 +30,27 @@ body{
 
 /* ===== CARD ===== */
 .card{
-  background:#fff;
-  border-radius:12px;
-  padding:16px;
-  margin-bottom:14px;
-  border:1px solid #e3e7ed;
-  box-shadow:0 6px 18px rgba(0,0,0,0.06);
+  background:rgba(255,255,255,0.85);
+  backdrop-filter:blur(12px);
+  -webkit-backdrop-filter:blur(12px);
+
+  border-radius:18px;
+  padding:18px;
+  margin-bottom:16px;
+
+  border:1px solid rgba(255,255,255,0.5);
+
+  box-shadow:
+  0 8px 25px rgba(0,0,0,0.08),
+  inset 0 1px 0 rgba(255,255,255,0.8);
 }
 
 h2{
-  font-size:16px;
-  margin-bottom:12px;
+  text-align:center;
+  font-size:20px;
+  font-weight:700;
+  margin-bottom:16px;
+  color:#1e293b;
 }
 
 /* ===== INPUT ===== */
@@ -68,20 +84,28 @@ h2{
 
 /* ===== BUTTON ===== */
 .btn{
-  padding:9px;
-  font-size:13px;
-  border-radius:8px;
+  padding:12px;
   border:none;
-  background:#4da3ff;
+  border-radius:12px;
+
+  background:linear-gradient(
+  135deg,
+  #4da3ff,
+  #2979ff
+  );
+
   color:#fff;
-  cursor:pointer;
-  transition:0.2s;
-  font-weight:500;
+  font-weight:600;
+  font-size:14px;
+
+  box-shadow:
+  0 4px 12px rgba(41,121,255,.25);
+
+  transition:.25s;
 }
 
 .btn:hover{
-  background:#2f86e6;
-  transform:translateY(-1px);
+  transform:translateY(-2px);
 }
 
 .btn:active{
@@ -136,8 +160,24 @@ h2{
 
 /* ปุ่มชุดเลข = ฟ้าเรียบ */
 .extra-grid .main-btn{
-  background:#4da3ff;
+  padding:12px;
+  border:none;
+  border-radius:14px;
+
+  background:linear-gradient(
+    135deg,
+    #4f9cf9,
+    #2f73ea
+  );
+
   color:#fff;
+  font-size:14px;
+  font-weight:600;
+
+  box-shadow:
+    0 6px 15px rgba(47,115,234,.25);
+
+  transition:.25s;
 }
 
 .extra-grid .main-btn:hover{
@@ -176,21 +216,21 @@ h2{
 }
 
 .num{
-  background:#eef3ff;
-  border-radius:6px;
-  padding:7px;
+  background:white;
+  border:1px solid #dce7ff;
+  border-radius:10px;
+  padding:9px;
   text-align:center;
-  font-size:13px;
-  border:1px solid #e0e6f0;
-  letter-spacing:1px;
-  transition:0.2s;
-  animation:fadeIn 0.3s ease;
+  font-weight:600;
+  box-shadow:
+  0 2px 8px rgba(0,0,0,.04);
+  transition:.2s;
 }
 
 .num:hover{
-  background:#eef3ff;
-  color:#2c3e50;
-  transform:none;
+  transform:translateY(-2px);
+  box-shadow:
+  0 6px 16px rgba(77,163,255,.15);
 }
 
 /* animation */
@@ -254,16 +294,26 @@ h2{
 /* ===== TOAST ===== */
 #toast{
   position:fixed;
-  top:20px;
+  top:25px;
   left:50%;
+  z-index:100000;
   transform:translateX(-50%) translateY(-20px);
-  background:#4da3ff;
+  background:linear-gradient(
+    135deg,
+    #4da3ff,
+    #2f73ea
+  );
+
   color:#fff;
-  padding:8px 14px;
-  border-radius:8px;
-  font-size:13px;
+  padding:14px 24px;
+  border-radius:14px;
+  font-size:16px;
+  font-weight:600;
+
+  box-shadow:
+    0 8px 25px rgba(47,115,234,.35);
   opacity:0;
-  transition:0.3s;
+  transition:.3s;
 }
 
 #toast.show{
@@ -282,6 +332,7 @@ h2{
   background:rgba(255,255,255,0.5);
   pointer-events:none;
 }
+
 
 @keyframes rippleEffect{
   to{
@@ -323,15 +374,166 @@ h2{
   position: relative;
   z-index: 1;
 }
+.special-panel{
+  display:none;
+  margin-top:12px;
+  grid-template-columns:repeat(3,1fr);
+  gap:8px;
+}
+
+.special-panel.show{
+  display:grid;
+}
+
+.special-panel.show{
+  display:grid;
+}
+
+.special-item{
+  padding:12px;
+  border:none;
+  border-radius:10px;
+
+  background:#f5f7fb;
+
+  box-shadow:
+  0 2px 8px rgba(0,0,0,.08);
+
+  font-family:inherit;
+  font-size:13px;
+  font-weight:600;
+
+  cursor:pointer;
+}
+
+.special-item:hover{
+  transform:translateY(-2px);
+}
+.special-overlay{
+  position:fixed;
+  inset:0;
+
+  background:rgba(0,0,0,.35);
+
+  display:none;
+  justify-content:center;
+  align-items:center;
+
+  z-index:9999;
+}
+
+.special-overlay.show{
+  display:flex;
+}
+
+.special-popup{
+  width:90%;
+  max-width:700px;
+
+  background:#fff;
+
+  border-radius:18px;
+
+  padding:20px;
+
+  box-shadow:
+  0 20px 50px rgba(0,0,0,.25);
+
+  animation:popupShow .25s ease;
+}
+
+@keyframes popupShow{
+  from{
+    opacity:0;
+    transform:scale(.9);
+  }
+  to{
+    opacity:1;
+    transform:scale(1);
+  }
+}
+
+.special-header{
+  position:relative;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  margin-bottom:15px;
+
+  font-size:22px;
+  font-weight:700;
+}
+
+.close-btn{
+  position:absolute;
+  right:0;
+
+  width:42px;
+  height:42px;
+
+  border:none;
+  border-radius:50%;
+  cursor:pointer;
+}
+
+.special-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:10px;
+}
+
+.special-item{
+  padding:16px;
+
+  border:none;
+
+  border-radius:12px;
+
+  background:#f8f9fb;
+
+  font-weight:600;
+
+  cursor:pointer;
+
+  transition:.2s;
+}
+
+.special-item:hover{
+  transform:translateY(-2px);
+  box-shadow:0 5px 15px rgba(0,0,0,.1);
+}
+
+.special-btn{
+  background:linear-gradient(
+    135deg,
+    #ffd54f,
+    #ffb300
+  ) !important;
+
+  color:#333 !important;
+
+  font-weight:700;
+
+  box-shadow:
+    0 6px 15px rgba(255,179,0,.35);
+
+  transition:.25s;
+}
+.special-btn:hover{
+  transform:translateY(-2px);
+
+  box-shadow:
+    0 10px 20px rgba(255,179,0,.45);
+}
 
 </style>
 </head>
 
 <body>
 <!-- ลายน้ำ 3 จุด -->
-<div class="watermark top">By ADEN🔥</div>
-<div class="watermark middle">By ADEN🔥</div>
-<div class="watermark bottom">By ADEN🔥</div>
+<div class="watermark top">By ADEN</div>
+<div class="watermark middle">By ADEN</div>
+<div class="watermark bottom">By ADEN</div>
 <div class="container">
 
 <div class="card">
@@ -363,8 +565,66 @@ h2{
     <button class="main-btn" onclick="showSet('back')">ชุดเบิ้ลหลัง</button>
     <button class="main-btn" onclick="showSet('siblings')">เลขพี่น้อง</button>
     <button class="main-btn" onclick="showSet('all')">ชุดประหาร</button>
+    <button class="main-btn special-btn" onclick="openSpecialPanel()">  💎 เลขชุดพิเศษ</button>
   
   </div>
+
+<div id="specialOverlay" class="special-overlay">
+
+  <div class="special-popup">
+
+    <div class="special-header">
+      <span>💎 เลขชุดพิเศษ</span>
+
+      <button class="close-btn"
+              onclick="closeSpecialPanel()">
+        ✕
+      </button>
+    </div>
+
+    <div class="special-grid">
+
+      <button class="special-item" onclick="loadSpecial('012n9')">
+        ชุด 012 (ไม่มี 9)
+      </button>
+
+      <button class="special-item" onclick="loadSpecial('012')">
+        ชุด 012
+      </button>
+
+      <button class="special-item" onclick="loadSpecial('012n49')">
+        ชุด 012 (ไม่มี 4,9)
+      </button>
+
+      <button class="special-item" onclick="loadSpecial('013')">
+        ชุด 013
+      </button>
+
+      <button class="special-item" onclick="loadSpecial('014')">
+        ชุด 014
+      </button>
+
+      <button class="special-item" onclick="loadSpecial('023')">
+        ชุด 023
+      </button>
+
+      <button class="special-item" onclick="loadSpecial('024')">
+        ชุด 024
+      </button>
+
+      <button class="special-item" onclick="loadSpecial('034')">
+        ชุด 034
+      </button>
+
+      <button class="special-item" onclick="loadSpecial('123')">
+        ชุด 123
+      </button>
+
+    </div>
+
+  </div>
+
+</div>
 
   
 </div>
@@ -603,6 +863,229 @@ function copyExtraResult() {
   navigator.clipboard.writeText(currentResult.join(' '));
   showToast("คัดลอกแล้ว");
 }
+
+function toggleSpecial(){
+  document
+    .getElementById("specialPanel")
+    .classList.toggle("show");
+}
+
+function loadSpecial(type){
+
+  let result=[];
+
+  switch(type){
+
+    case "012":
+result=[
+"012","013","014","015","017","019",
+"023","024","025","027","029",
+"034","035","037","039",
+"045","047","049",
+"057","059","079",
+"123","124","125","127","129",
+"134","135","137","139",
+"145","147","149",
+"157","159","179",
+"234","235","237","239",
+"245","247","249",
+"257","259","279",
+"345","347","349",
+"357","359","379",
+"457","459","479","579"
+];
+break;
+
+case "012n9":
+result=[
+"012","013","014","015","016","017","018",
+"023","024","026","025","027","028","034",
+"035","036","037","038","045","047","048",
+"056","057","058","076","078","086","123",
+"124","126","127","128","134","136","135","137",
+"138","146","147","148","156","157","158","176",
+"178","234","235","236","237","238","246",
+"247","248","256","257","258","276","278",
+"346","345","347","348","356","357","358",
+"368","376","378","456","457","458","468",
+"476","478","576","578","586","678","769","869"
+];
+break;
+
+case "012n49":
+result=[
+"012","013","015","016","017","018",
+"023","025","026","027","028",
+"035","036","037","038",
+"056","057","058",
+"067","068","078",
+"123","125","126","127","128",
+"135","136","137","138",
+"156","157","158",
+"167","168","178",
+"235","236","237","238",
+"256","257","258",
+"267","268","278",
+"356","357","358",
+"367","368","378",
+"567","568","578","678"
+];
+break;
+
+case "013":
+result=[
+"013","014","016","017","018","019",
+"034","036","037","038","039",
+"046","047","048","049",
+"067","068","069","078","079",
+"089","134","136","137","138","139",
+"146","147","148","149",
+"167","168","169","178","179",
+"189","346","347","348","349",
+"367","368","369","378","379",
+"389","467","468","469","478","479",
+"489","678","679","689","789"
+];
+break;
+
+case "014":
+result=[
+"014","015","016","017","018","019",
+"045","046","047","048","049",
+"056","057","058","059",
+"067","068","069",
+"078","079","089",
+"145","146","147","148","149",
+"156","157","158","159",
+"167","168","169",
+"178","179","189",
+"456","457","458","459",
+"467","468","469",
+"478","479","489",
+"567","568","569",
+"578","579","589",
+"678","679","689","789"
+];
+break;
+
+case "023":
+result=[
+"023","024","025","026","028",
+"029","034","035","036","038",
+"039","045","046","048","049",
+"056","058","059","068","069",
+"089","234","235","236","238",
+"239","245","246","248","249",
+"256","258","259","268","269",
+"289","345","346","348","349",
+"356","358","359","368","369",
+"389","456","458","459","468",
+"469","489","568","569","589",
+"689"
+];
+break;
+
+case "024":
+result=[
+"024","025","026","027","028","029",
+"045","046","047","048","049",
+"056","057","058","059",
+"067","068","069",
+"078","079","089",
+"245","246","247","248","249",
+"256","257","258","259",
+"267","268","269",
+"278","279","289",
+"456","457","458","459",
+"467","468","469",
+"478","479","489",
+"567","568","569",
+"578","579","589",
+"678","679","689","789"
+];
+break;
+
+case "034":
+result=[
+"034","035","036","037","038","039",
+"045","046","047","048","049",
+"056","057","058","059",
+"067","068","069",
+"078","079","089",
+"345","346","347","348","349",
+"356","357","358","359",
+"367","368","369",
+"378","379","389",
+"456","457","458","459",
+"467","468","469",
+"478","479","489",
+"567","568","569",
+"578","579","589",
+"678","679","689","789"
+];
+break;
+
+case "123":
+result=[
+"123","124","125","127","128","129",
+"134","135","137","138","139",
+"145","147","148","149",
+"157","158","159",
+"178","179","189",
+"234","235","237","238","239",
+"245","247","248","249",
+"257","258","259",
+"278","279","289",
+"345","347","348","349",
+"357","358","359",
+"378","379","389",
+"457","458","459",
+"478","479","489",
+"578","579","589","789"
+];
+break;
+  }
+
+currentResult = result;
+renderResult(result);
+
+
+document.getElementById("resultBox")
+?.scrollIntoView({
+    behavior:"smooth",
+    block:"start"
+});
+}
+
+function openSpecialPanel(){
+  document
+    .getElementById("specialOverlay")
+    .classList.add("show");
+}
+
+function closeSpecialPanel(){
+  document
+    .getElementById("specialOverlay")
+    .classList.remove("show");
+}
+document.addEventListener("click", function(e){
+
+  const popup = document.querySelector(".special-popup");
+  const btn = document.querySelector(".special-btn");
+
+  if(
+      document.getElementById("specialOverlay")
+      .classList.contains("show")
+      &&
+      !popup.contains(e.target)
+      &&
+      !btn.contains(e.target)
+  ){
+      closeSpecialPanel();
+  }
+
+});
+
 
 </script>
 <div id="toast"></div>
