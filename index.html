@@ -1,1093 +1,1085 @@
 <!DOCTYPE html>
 <html lang="th">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>วินเลข</title>
-
-<link href="https://fonts.googleapis.com/css2?family=Kanit&display=swap" rel="stylesheet">
-
-<style>
-/* ===== BASE ===== */
-body{
-  font-family:'Kanit',sans-serif;
-  margin:0;
-  color:#2c3e50;
-
-  background:
-  radial-gradient(circle at top left,#6ea8ff 0%,transparent 35%),
-  radial-gradient(circle at bottom right,#7ed6a7 0%,transparent 35%),
-  #eef3ff;
-
-  min-height:100vh;
-}
-
-.container{
-  max-width:520px;
-  margin:auto;
-  padding:16px;
-}
-
-/* ===== CARD ===== */
-.card{
-  background:rgba(255,255,255,0.85);
-  backdrop-filter:blur(12px);
-  -webkit-backdrop-filter:blur(12px);
-
-  border-radius:18px;
-  padding:18px;
-  margin-bottom:16px;
-
-  border:1px solid rgba(255,255,255,0.5);
-
-  box-shadow:
-  0 8px 25px rgba(0,0,0,0.08),
-  inset 0 1px 0 rgba(255,255,255,0.8);
-}
-
-h2{
-  text-align:center;
-  font-size:20px;
-  font-weight:700;
-  margin-bottom:16px;
-  color:#1e293b;
-}
-
-/* ===== INPUT ===== */
-.input-box{
-  display:flex;
-  justify-content:center;
-  margin-bottom:12px;
-}
-
-.input-box input{
-  width:100%;
-  max-width:260px;
-  padding:10px;
-  border-radius:8px;
-  border:1px solid #dcdfe6;
-  box-sizing:border-box;
-}
-.input-box input:focus{
-  outline:none;
-  border-color:#4da3ff;
-  box-shadow:0 0 0 3px rgba(77,163,255,0.15);
-}
-
-/* ===== BUTTON GRID ===== */
-.btn-grid{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:8px;
-  margin-bottom:10px;
-}
-
-/* ===== BUTTON ===== */
-.btn{
-  padding:12px;
-  border:none;
-  border-radius:12px;
-
-  background:linear-gradient(
-  135deg,
-  #4da3ff,
-  #2979ff
-  );
-
-  color:#fff;
-  font-weight:600;
-  font-size:14px;
-
-  box-shadow:
-  0 4px 12px rgba(41,121,255,.25);
-
-  transition:.25s;
-}
-
-.btn:hover{
-  transform:translateY(-2px);
-}
-
-.btn:active{
-  transform:scale(0.95);
-}
-
-/* ===== ACTION ROW ===== */
-.action-row{
-  display:flex;
-  justify-content:center; /* ให้อยู่กลาง */
-  gap:12px;
-  margin-top:10px;
-}
-
-.action-row .btn{
-  flex:0 0 140px;          /* ขนาดปุ่มเท่ากัน */
-  box-shadow:0 4px 10px rgba(0,0,0,0.08);
-  border-radius:10px;
-}
-/* ปุ่มคัดลอก / ล้าง = ปกติ */
-.action-row .btn:first-child{
-  background:#2ecc71;
-  color:#fff;
-  
-}
-
-.action-row .btn:first-child:hover{
-  background:#27ae60;
-  transform:scale(1.03);
-}
-
-.action-row .btn:last-child{
-  background:#e74c3c;
-  color:#fff;
-}
-
-.action-row .btn:last-child:hover{
-  background:#c0392b;
-  transform:translateY(-1px);
-  transform:scale(1.03);
-}
-/*cssชุดเลข */
-.extra-grid .main-btn,
-.copy-btn{
-  padding:10px;
-  border-radius:8px;
-  border:none;
-  cursor:pointer;
-  font-size:13px;
-  transition:0.15s;
-}
-
-/* ปุ่มชุดเลข = ฟ้าเรียบ */
-.extra-grid .main-btn{
-  padding:12px;
-  border:none;
-  border-radius:14px;
-
-  background:linear-gradient(
-    135deg,
-    #4f9cf9,
-    #2f73ea
-  );
-
-  color:#fff;
-  font-size:14px;
-  font-weight:600;
-
-  box-shadow:
-    0 6px 15px rgba(47,115,234,.25);
-
-  transition:.25s;
-}
-
-.extra-grid .main-btn:hover{
-  transform:scale(1.02); /* ขยายเบาๆ */
-}
-
-/* ปุ่มคัดลอก = เขียว */
-.copy-btn{
-  background:#2ecc71;
-  color:#fff;
-}
-
-.copy-btn:hover{
-  transform:scale(1.02);
-}
-
-/* textarea ให้ดู clean */
-#extraResult{
-  width:100%;
-  margin-top:10px;
-  height:150px;
-  padding:10px;
-  border-radius:8px;
-  border:1px solid #d6dbe6;
-  font-family:inherit;
-  font-size:13px;
-  background:#fff;
-  resize:none;
-}
-/* ===== RESULT GRID ===== */
-.result-grid{
-  display:grid;
-  grid-template-columns:repeat(auto-fill,minmax(55px,1fr));
-  gap:6px;
-  margin-top:10px;
-}
-
-.num{
-  background:white;
-  border:1px solid #dce7ff;
-  border-radius:10px;
-  padding:9px;
-  text-align:center;
-  font-weight:600;
-  box-shadow:
-  0 2px 8px rgba(0,0,0,.04);
-  transition:.2s;
-}
-
-.num:hover{
-  transform:translateY(-2px);
-  box-shadow:
-  0 6px 16px rgba(77,163,255,.15);
-}
-
-/* animation */
-@keyframes fadeIn{
-  from{opacity:0; transform:translateY(6px);}
-  to{opacity:1; transform:translateY(0);}
-}
-
-/* ===== COUNT ===== */
-.count{
-  margin-top:8px;
-  font-size:13px;
-  color:#7f8c8d;
-}
-
-/* ===== PERMUTE BUTTON (เด่น + pulse เบา) ===== */
-.permute-box{
-  margin-top:14px;
-  margin-bottom:8px;
-}
-
-.permute-btn{
-  width:100%;
-  background:linear-gradient(135deg,#ff9f43,#ff6b6b);
-  color:#fff;
-  font-weight:600;
-  box-shadow:0 2px 8px rgba(255,107,107,0.25);
-  transition:0.2s;
-  animation:pulseSoft 2.5s infinite;
-}
-
-.permute-btn{
-  width:100%;
-  background:linear-gradient(135deg,#f1c40f,#f39c12);
-  color:#1f1f1f;
-  font-weight:600;
-  border:none;
-  box-shadow:0 2px 8px rgba(241,196,15,0.25);
-  animation:pulseSoft 2.5s infinite;
-}
-
-.permute-btn:hover{
-  transform:scale(1.03);
-  filter:none;
-  box-shadow:0 2px 8px rgba(241,196,15,0.25);
-  background:linear-gradient(135deg,#f1c40f,#f39c12);
-  color:#1f1f1f;
-}
-
-.permute-btn:active{
-  transform:scale(0.96);
-}
-
-/* pulse เบา */
-@keyframes pulseSoft{
-  0%{box-shadow:0 0 0 0 rgba(255,107,107,0.25);}
-  70%{box-shadow:0 0 0 6px rgba(255,107,107,0);}
-  100%{box-shadow:0 0 0 0 rgba(255,107,107,0);}
-}
-
-/* ===== TOAST ===== */
-#toast{
-  position:fixed;
-  top:25px;
-  left:50%;
-  z-index:100000;
-  transform:translateX(-50%) translateY(-20px);
-  background:linear-gradient(
-    135deg,
-    #4da3ff,
-    #2f73ea
-  );
-
-  color:#fff;
-  padding:14px 24px;
-  border-radius:14px;
-  font-size:16px;
-  font-weight:600;
-
-  box-shadow:
-    0 8px 25px rgba(47,115,234,.35);
-  opacity:0;
-  transition:.3s;
-}
-
-#toast.show{
-  opacity:1;
-  transform:translateX(-50%) translateY(0);
-}
-.btn, .permute-btn{
-  position:relative;
-  overflow:hidden;
-}
-.ripple{
-  position:absolute;
-  border-radius:50%;
-  transform:scale(0);
-  animation:rippleEffect 600ms linear;
-  background:rgba(255,255,255,0.5);
-  pointer-events:none;
-}
-
-
-@keyframes rippleEffect{
-  to{
-    transform:scale(4);
-    opacity:0;
-  }
-}
-
- /* 🔥 ลายน้ำ 3 จุด */
-.watermark {
-  position: fixed;
-  left: 50%;
-  transform: translateX(-50%) rotate(-25deg);
-  text-shadow: 0 0 10px rgba(0,0,0,0.3);
-
-  pointer-events: none;
-  user-select: none;
-  z-index: 0;
-
-  font-size: 90px;
-  font-weight: 700;
-  letter-spacing: 5px;
-
-  color: rgba(255,255,255,0.18);
-
-  white-space: nowrap;
-
-  filter: blur(1px);  /* 👈 เบลอเหมือนเงา */
-  opacity: 0.6;       /* 👈 ลดความแข็ง */
-}
-
-/* ตำแหน่ง */
-.watermark.top { top: 10%; }
-.watermark.middle { top: 50%; }
-.watermark.bottom { bottom: 10%; }
-
-/* เนื้อหาอยู่บน */
-.container, .card {
-  position: relative;
-  z-index: 1;
-}
-.special-panel{
-  display:none;
-  margin-top:12px;
-  grid-template-columns:repeat(3,1fr);
-  gap:8px;
-}
-
-.special-panel.show{
-  display:grid;
-}
-
-.special-panel.show{
-  display:grid;
-}
-
-.special-item{
-  padding:12px;
-  border:none;
-  border-radius:10px;
-
-  background:#f5f7fb;
-
-  box-shadow:
-  0 2px 8px rgba(0,0,0,.08);
-
-  font-family:inherit;
-  font-size:13px;
-  font-weight:600;
-
-  cursor:pointer;
-}
-
-.special-item:hover{
-  transform:translateY(-2px);
-}
-.special-overlay{
-  position:fixed;
-  inset:0;
-
-  background:rgba(0,0,0,.35);
-
-  display:none;
-  justify-content:center;
-  align-items:center;
-
-  z-index:9999;
-}
-
-.special-overlay.show{
-  display:flex;
-}
-
-.special-popup{
-  width:90%;
-  max-width:700px;
-
-  background:#fff;
-
-  border-radius:18px;
-
-  padding:20px;
-
-  box-shadow:
-  0 20px 50px rgba(0,0,0,.25);
-
-  animation:popupShow .25s ease;
-}
-
-@keyframes popupShow{
-  from{
-    opacity:0;
-    transform:scale(.9);
-  }
-  to{
-    opacity:1;
-    transform:scale(1);
-  }
-}
-
-.special-header{
-  position:relative;
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  margin-bottom:15px;
-
-  font-size:22px;
-  font-weight:700;
-}
-
-.close-btn{
-  position:absolute;
-  right:0;
-
-  width:42px;
-  height:42px;
-
-  border:none;
-  border-radius:50%;
-  cursor:pointer;
-}
-
-.special-grid{
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:10px;
-}
-
-.special-item{
-  padding:16px;
-
-  border:none;
-
-  border-radius:12px;
-
-  background:#f8f9fb;
-
-  font-weight:600;
-
-  cursor:pointer;
-
-  transition:.2s;
-}
-
-.special-item:hover{
-  transform:translateY(-2px);
-  box-shadow:0 5px 15px rgba(0,0,0,.1);
-}
-
-.special-btn{
-  background:linear-gradient(
-    135deg,
-    #ffd54f,
-    #ffb300
-  ) !important;
-
-  color:#333 !important;
-
-  font-weight:700;
-
-  box-shadow:
-    0 6px 15px rgba(255,179,0,.35);
-
-  transition:.25s;
-}
-.special-btn:hover{
-  transform:translateY(-2px);
-
-  box-shadow:
-    0 10px 20px rgba(255,179,0,.45);
-}
-
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WINLOT</title>
+    <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Kanit', sans-serif;
+        }
+
+        body {
+            background: #f3f5f7;
+            padding: 20px;
+            transition: .3s;
+        }
+
+        body.dark {
+            background: #111827;
+            color: #fff;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: auto;
+        }
+
+        /* NAVBAR (เหลือเพียงปุ่ม Dark Mode ปุ่มเดียว) */
+        .navbar {
+            background: #fff;
+            padding: 16px 20px;
+            border-radius: 16px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, .08);
+            margin-bottom: 20px;
+        }
+
+        .dark .navbar {
+            background: #1f2937;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: 700;
+            color: #2563eb;
+        }
+
+        .nav-right {
+            display: flex;
+            gap: 10px;
+        }
+
+        .btn {
+            border: none;
+            cursor: pointer;
+            padding: 10px 16px;
+            border-radius: 10px;
+            font-weight: 500;
+            transition: .2s;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+        }
+
+        .btn-primary {
+            background: #2563eb;
+            color: white;
+        }
+
+        .btn-danger {
+            background: #ef4444;
+            color: white;
+        }
+
+        .btn-success {
+            background: #22c55e;
+            color: white;
+        }
+        .btn-success:hover {
+            background: #16a34a;
+        }
+
+        .btn-dark {
+            background: #111827;
+            color: white;
+        }
+
+        /* ปุ่มเริ่มใหม่ / ล้างข้อมูล (สีแดงเข้ม ตัวหนังสือใหญ่ขึ้น) */
+        .btn-reset {
+            background: #dc2626;
+            color: white;
+            border: none;
+            cursor: pointer;
+            padding: 12px 20px;
+            border-radius: 10px;
+            font-weight: 500;
+            font-size: 17px;
+            transition: .2s;
+            flex-shrink: 0;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .btn-reset:hover {
+            background: #991b1b;
+            transform: translateY(-2px);
+        }
+
+        /* ปุ่มชุดเลข */
+        .btn-special-inline {
+            background: #2563eb;
+            color: white;
+            border: none;
+            cursor: pointer;
+            padding: 12px 20px;
+            border-radius: 10px;
+            font-weight: 500;
+            font-size: 17px;
+            transition: .2s;
+            flex-shrink: 0;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+        }
+        .btn-special-inline:hover {
+            background: #1d4ed8;
+            transform: translateY(-2px);
+        }
+
+        /* ปุ่มคำนวณแยกชุด (สีเขียวเข้ม ตัวหนังสือใหญ่พิเศษ) */
+        .btn-calc {
+            background: #15803d;
+            color: white;
+            border: none;
+            cursor: pointer;
+            padding: 12px 20px;
+            border-radius: 10px;
+            font-weight: 500;
+            font-size: 18px;
+            transition: .2s;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            flex-grow: 1;
+        }
+        .btn-calc:hover {
+            background: #166534;
+            transform: translateY(-2px);
+        }
+
+        /* ปุ่มคัดลอกกล่องใหญ่ทั้งหมด (ขยายขนาดอักษรและปุ่มให้อ่านง่ายยิ่งขึ้น) */
+        .btn-copy-all {
+            font-size: 16px !important;
+            padding: 12px 20px !important;
+            font-weight: 600 !important;
+        }
+
+        /* ปุ่มคัดลอกย่อยประจำชุดเลข (สีเขียว ขนาดใหญ่ขึ้น) */
+        .btn-copy-mini {
+            background: #22c55e;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            font-size: 15px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: 0.2s;
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+        }
+        .btn-copy-mini:hover {
+            background: #16a34a;
+            transform: scale(1.03);
+        }
+        .dark .btn-copy-mini {
+            background: #22c55e;
+            color: white;
+        }
+        .dark .btn-copy-mini:hover {
+            background: #16a34a;
+        }
+
+        /* INPUT BOX */
+        .input-box {
+            background: white;
+            padding: 20px;
+            border-radius: 16px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, .08);
+            margin-bottom: 25px;
+        }
+
+        .dark .input-box {
+            background: #1f2937;
+        }
+
+        textarea {
+            width: 100%;
+            height: 150px;
+            border: 1px solid #ddd;
+            border-radius: 12px;
+            padding: 15px;
+            resize: none;
+            font-size: 18px;
+            font-weight: 500;
+            letter-spacing: 1px;
+        }
+
+        .dark textarea {
+            background: #111827;
+            border: 1px solid #374151;
+            color: white;
+        }
+
+        /* ปรับสไตล์ปุ่ม Action ให้ยืดหยุ่นรองรับ 3 ปุ่ม */
+        .action-buttons {
+            display: flex;
+            gap: 10px;
+            margin-top: 15px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        /* RESULT GRID */
+        .result-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+        }
+
+        .result-card {
+            background: white;
+            border-radius: 16px;
+            padding: 18px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, .08);
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            transition: all 0.3s ease;
+        }
+
+        .dark .result-card {
+            background: #1f2937;
+        }
+
+        .result-card.special-highlight {
+            border: 3px solid #2563eb;
+            box-shadow: 0 0 25px rgba(37, 99, 235, 0.25);
+            background: #f8fafc;
+        }
+        
+        .dark .result-card.special-highlight {
+            border: 3px solid #3b82f6;
+            box-shadow: 0 0 25px rgba(59, 130, 246, 0.3);
+            background: #1e293b;
+        }
+
+        .result-card.expanded-box {
+            grid-column: span 2;
+        }
+
+        .result-card.hidden-box {
+            display: none !important;
+        }
+
+        .result-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 12px;
+        }
+
+        .result-title {
+            font-size: 18px;
+            font-weight: 700;
+        }
+
+        .special-title-text {
+            color: #2563eb;
+            font-size: 20px;
+        }
+        .dark .special-title-text {
+            color: #60a5fa;
+        }
+
+        /* กล่องแสดงผลลัพธ์ (ความสูงแบบเต็มหน้าจอไม่มีแถบเลื่อน) */
+        .result-content {
+            margin-top: 12px;
+            background: #eef4ef;
+            border-radius: 12px;
+            min-height: 140px;
+            padding: 5px;
+        }
+
+        .dark .result-content {
+            background: #111827;
+        }
+
+        /* โครงสร้างแสดงผลแยกชุดด้านในกล่อง */
+        .set-row-item {
+            padding: 16px 12px;
+            border-bottom: 1px dashed rgba(0,0,0,0.1);
+            word-wrap: break-word;
+        }
+        .dark .set-row-item {
+            border-bottom: 1px dashed rgba(255,255,255,0.1);
+        }
+        .set-row-item:last-child {
+            border-bottom: none;
+        }
+
+        .set-row-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 8px;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        /* ป้ายชื่อชุดเลข */
+        .set-label {
+            font-size: 16px;
+            color: #2563eb;
+            font-weight: 700;
+            text-transform: uppercase;
+        }
+        .dark .set-label {
+            color: #60a5fa;
+        }
+
+        /* ปรับสีป้ายระบุจำนวนชุดเป็นสีเทาเข้ม/อ่อนตามธีม */
+        .set-count {
+            color: #374151; 
+            font-weight: 500;
+            text-transform: none;
+        }
+        .dark .set-count {
+            color: #d1d5db; 
+        }
+
+        /* กล่องแสดงผลตัวเลขแยกชุด */
+        .set-numbers-box {
+            display: block;
+            margin-top: 6px;
+            font-size: 18px;       
+            line-height: 2;        
+            letter-spacing: 0.5px;  
+            word-spacing: 4px;     
+            font-weight: 400;      
+        }
+
+        /* TOAST */
+        .toast {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: #22c55e;
+            color: white;
+            padding: 12px 20px;
+            border-radius: 10px;
+            opacity: 0;
+            pointer-events: none;
+            transition: .3s;
+            z-index: 9999;
+            font-weight: 500;
+        }
+
+        .toast.show {
+            opacity: 1;
+        }
+
+        /* POPUP MODAL */
+        .modal {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, .6);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 999;
+        }
+
+        .modal.show {
+            display: flex;
+        }
+
+        .modal-box {
+            background: white;
+            padding: 25px;
+            width: 90%;
+            max-width: 700px;
+            border-radius: 16px;
+        }
+
+        .dark .modal-box {
+            background: #1f2937;
+        }
+
+        /* ปรับสไตล์ปุ่มตามเมนูรูปภาพ */
+        .special-grid-main {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            margin-top: 15px;
+        }
+
+        .special-item-blue {
+            padding: 16px;
+            background: #3b82f6; /* สีฟ้าน้ำเงินแบบปุ่มมาตรฐานตามภาพ */
+            color: white;
+            border-radius: 14px;
+            text-align: center;
+            cursor: pointer;
+            font-size: 18px;
+            font-weight: 700;
+            box-shadow: 0 4px 10px rgba(59, 130, 246, 0.3);
+            transition: .2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .special-item-blue:hover {
+            background: #2563eb;
+            transform: translateY(-2px);
+        }
+
+        .special-item-gold {
+            padding: 16px;
+            background: #ffb01f; /* สีเหลืองส้มทองตามปุ่มพิเศษในภาพ */
+            color: #1e293b;
+            border-radius: 14px;
+            text-align: center;
+            cursor: pointer;
+            font-size: 18px;
+            font-weight: 700;
+            box-shadow: 0 4px 10px rgba(255, 176, 31, 0.3);
+            transition: .2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .special-item-gold:hover {
+            background: #f59e0b;
+            transform: translateY(-2px);
+        }
+
+        .special-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+            gap: 10px;
+            margin-top: 15px;
+        }
+
+        .special-item {
+            padding: 12px;
+            background: #f3f4f6;
+            border-radius: 10px;
+            text-align: center;
+            cursor: pointer;
+            font-weight: 500;
+            transition: .2s;
+        }
+
+        .special-item:hover {
+            background: #2563eb;
+            color: white;
+        }
+
+        .dark .special-item {
+            background: #374151;
+        }
+        
+        .dark .special-item:hover {
+            background: #2563eb;
+        }
+
+        @media(max-width:768px) {
+            .navbar {
+                flex-direction: column;
+                gap: 10px;
+            }
+            .result-grid {
+                grid-template-columns: 1fr;
+            }
+            .result-card.expanded-box {
+                grid-column: span 1;
+            }
+        }
+
+        @media(max-width:480px) {
+            .action-buttons {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            .btn-reset, .btn-special-inline, .btn-calc {
+                width: 100%;
+            }
+            .special-grid-main {
+                grid-template-columns: 1fr;
+                gap: 10px;
+            }
+        }
+    </style>
 </head>
-
 <body>
-<!-- ลายน้ำ 3 จุด -->
-<div class="watermark top">By ADEN</div>
-<div class="watermark middle">By ADEN</div>
-<div class="watermark bottom">By ADEN</div>
+
 <div class="container">
 
-<div class="card">
-  <h2><center>🎯 วินเลข 🎯</h2>
-  
-
-  <div class="input-box">
-    <input id="inputNum" placeholder="เช่น 1234567">
-  </div>
-
-  <div class="btn-grid">
-    <button class="btn" onclick="generateWin(2,false)">วิน 2 ตัว</button>
-    <button class="btn" onclick="generateWin(2,true)">2 ตัวรวมเบิ้ล</button>
-
-    <button class="btn" onclick="generateWin(3,false)">วิน 3 ตัว</button>
-    <button class="btn" onclick="generateWin(3,true)">3 ตัวรวมเบิ้ล</button>
-  </div>
-
- 
-</div>
-<!-- 🧾 ชุดเลข (ย้ายมาไว้บนผลลัพธ์) -->
-<div class="card">
-
-  <h2><center>🧾 ชุดเลข 🧾</h2>
-
-  <div class="btn-grid extra-grid">
-    <button class="main-btn" onclick="showSet('haam')">ชุดหาม</button>
-    <button class="main-btn" onclick="showSet('front')">ชุดเบิ้ลหน้า</button>
-    <button class="main-btn" onclick="showSet('back')">ชุดเบิ้ลหลัง</button>
-    <button class="main-btn" onclick="showSet('siblings')">เลขพี่น้อง</button>
-    <button class="main-btn" onclick="showSet('all')">ชุดประหาร</button>
-    <button class="main-btn special-btn" onclick="openSpecialPanel()">  💎 เลขชุดพิเศษ</button>
-  
-  </div>
-
-<div id="specialOverlay" class="special-overlay">
-
-  <div class="special-popup">
-
-    <div class="special-header">
-      <span>💎 เลขชุดพิเศษ</span>
-
-      <button class="close-btn"
-              onclick="closeSpecialPanel()">
-        ✕
-      </button>
+    <div class="navbar">
+        <div class="logo">WINLOT</div>
+        <div class="nav-right">
+            <!-- เหลือเพียงปุ่ม Dark Mode ปุ่มเดียวตามคำขอ -->
+            <button class="btn btn-dark" onclick="toggleDark()">🌙 Dark Mode</button>
+        </div>
     </div>
 
-    <div class="special-grid">
-
-      <button class="special-item" onclick="loadSpecial('012n9')">
-        ชุด 012 (ไม่มี 9)
-      </button>
-
-      <button class="special-item" onclick="loadSpecial('012')">
-        ชุด 012
-      </button>
-
-      <button class="special-item" onclick="loadSpecial('012n49')">
-        ชุด 012 (ไม่มี 4,9)
-      </button>
-
-      <button class="special-item" onclick="loadSpecial('013')">
-        ชุด 013
-      </button>
-
-      <button class="special-item" onclick="loadSpecial('014')">
-        ชุด 014
-      </button>
-
-      <button class="special-item" onclick="loadSpecial('023')">
-        ชุด 023
-      </button>
-
-      <button class="special-item" onclick="loadSpecial('024')">
-        ชุด 024
-      </button>
-
-      <button class="special-item" onclick="loadSpecial('034')">
-        ชุด 034
-      </button>
-
-      <button class="special-item" onclick="loadSpecial('123')">
-        ชุด 123
-      </button>
-
+    <div class="input-box">
+        <textarea id="inputNumbers" placeholder="ใส่เลขแยกบรรทัดเพื่อวินชุดได้เลย เช่น&#10;123456&#10;123457&#10;123458"></textarea>
+        <div class="action-buttons">
+            <!-- จัดเรียงปุ่มด้านล่างแบบครบชุด -->
+            <button class="btn-reset" onclick="resetAll()">เริ่มใหม่ / ล้างข้อมูล</button>
+            <button class="btn-special-inline" onclick="openSpecial()">💎 ชุดเลข</button>
+            <button class="btn-calc" onclick="calculate()"> คำนวณ</button>
+        </div>
     </div>
 
-  </div>
+    <div class="result-grid">
 
+        <div id="card_normal2" class="result-card">
+            <div class="result-header">
+                <div class="result-title">2 ตัวปกติ</div>
+                <small data-count="normal2">0 ชุด</small>
+            </div>
+            <!-- ขยายตัวหนังสือปุ่มคัดลอกกล่องใหญ่ด้วย btn-copy-all -->
+            <button class="btn btn-primary btn-copy-all" onclick="copyBox('normal2')">📋 คัดลอกทั้งหมด</button>
+            <div id="normal2" class="result-content"></div>
+        </div>
+
+        <div id="card_double2" class="result-card">
+            <div class="result-header">
+                <div class="result-title">2 ตัวรวมเบิ้ล</div>
+                <small data-count="double2">0 ชุด</small>
+            </div>
+            <button class="btn btn-primary btn-copy-all" onclick="copyBox('double2')">📋 คัดลอกทั้งหมด</button>
+            <div id="double2" class="result-content"></div>
+        </div>
+
+        <div id="card_normal3" class="result-card">
+            <div class="result-header">
+                <div class="result-title">3 ตัวปกติ</div>
+                <small data-count="normal3">0 ชุด</small>
+            </div>
+            <button class="btn btn-primary btn-copy-all" onclick="copyBox('normal3')">📋 คัดลอกทั้งหมด</button>
+            <div id="normal3" class="result-content"></div>
+        </div>
+
+        <div id="card_ham3" class="result-card">
+            <div class="result-header">
+                <div class="result-title">3 ตัวรวมหาม</div>
+                <small data-count="ham3">0 ชุด</small>
+            </div>
+            <button class="btn btn-primary btn-copy-all" onclick="copyBox('ham3')">📋 คัดลอกทั้งหมด</button>
+            <div id="ham3" class="result-content"></div>
+        </div>
+
+        <div id="card_all3" class="result-card">
+            <div class="result-header">
+                <div class="result-title">3 ตัวรวมตองรวมหาม</div>
+                <small data-count="all3">0 ชุด</small>
+            </div>
+            <button class="btn btn-primary btn-copy-all" onclick="copyBox('all3')">📋 คัดลอกทั้งหมด</button>
+            <div id="all3" class="result-content"></div>
+        </div>
+
+        <!-- เริ่มต้นซ่อนกล่องชุดพิเศษด้วยคลาส hidden-box -->
+        <div id="card_special3" class="result-card special-highlight hidden-box">
+            <div class="result-header">
+                <div class="result-title special-title-text" id="special_title">💎 3 ตัวชุดพิเศษ</div>
+                <small data-count="special3">0 ชุด</small>
+            </div>
+            <button class="btn btn-primary btn-copy-all" onclick="copyBox('special3')">📋 คัดลอกทั้งหมด</button>
+            <div id="special3" class="result-content"></div>
+        </div>
+
+    </div>
 </div>
 
-  
-</div>
+<div id="toast" class="toast">คัดลอกแล้ว</div>
 
-<!-- 📊 ผลลัพธ์ -->
-<div class="card">
-<div class="card" id="resultBox">
-  <h2>ผลลัพธ์</h2>
+<!-- POPUP MODAL (รองรับการสลับหน้าตามโครงสร้างภาพ) -->
+<div id="specialModal" class="modal">
+    <div class="modal-box">
+        
+        <!-- หน้าที่ 1: รายการปุ่มชุดเลข 6 ปุ่มตามรูปภาพ -->
+        <div id="modalMenuMain">
+            <h2 style="margin-bottom: 20px; text-align: center;">💎 เลือกประเภทชุดเลข</h2>
+            <div class="special-grid-main">
+                <div class="special-item-blue" onclick="selectPreset('ham')">ชุดหาม</div>
+                <div class="special-item-blue" onclick="selectPreset('doubleFront')">ชุดเบิ้ลหน้า</div>
+                <div class="special-item-blue" onclick="selectPreset('doubleBack')">ชุดเบิ้ลหลัง</div>
+                <div class="special-item-blue" onclick="selectPreset('sibling')">เลขพี่น้อง</div>
+                <div class="special-item-blue" onclick="selectPreset('prahan')">ชุดประหาร</div>
+                <!-- ปุ่มเหลืองส้มทองตามแบบรูปภาพ -->
+                <div class="special-item-gold" onclick="showSubSpecialMenu()">💎 เลขชุดพิเศษ</div>
+            </div>
+            <br>
+            <button class="btn btn-danger" style="width: 100%;" onclick="closeSpecial()">ปิด</button>
+        </div>
 
-  <div id="resultGrid" class="result-grid"></div>
-  <div class="count" id="countText">จำนวนชุด: 0</div>
+        <!-- หน้าที่ 2: หน้าต่างเลขชุดพิเศษแบบเดิม 9 ปุ่ม (เปิดเมื่อคลิกปุ่มส้มทอง) -->
+        <div id="modalMenuSub" style="display: none;">
+            <h2 style="margin-bottom: 20px; text-align: center;">💎 เลือกเลขชุดพิเศษ</h2>
+            <div class="special-grid">
+                <div class="special-item" onclick="selectSpecial('012n9')">ชุด 012 (ไม่มี 9)</div>
+                <div class="special-item" onclick="selectSpecial('012')">ชุด 012</div>
+                <div class="special-item" onclick="selectSpecial('012n49')">ชุด 012 (ไม่มี 4,9)</div>
+                <div class="special-item" onclick="selectSpecial('013')">ชุด 013</div>
+                <div class="special-item" onclick="selectSpecial('014')">ชุด 014</div>
+                <div class="special-item" onclick="selectSpecial('023')">ชุด 023</div>
+                <div class="special-item" onclick="selectSpecial('024')">ชุด 024</div>
+                <div class="special-item" onclick="selectSpecial('034')">ชุด 034</div>
+                <div class="special-item" onclick="selectSpecial('123')">ชุด 123</div>
+            </div>
+            <br>
+            <div style="display: flex; gap: 10px;">
+                <button class="btn btn-dark" style="flex: 1;" onclick="showMainMenu()">⬅ ย้อนกลับ</button>
+                <button class="btn btn-danger" style="flex: 1;" onclick="closeSpecial()">ปิด</button>
+            </div>
+        </div>
 
-  <!-- 🔁 ปุ่มกลับเลข (สำคัญ) -->
-  <div class="permute-box">
-    <button class="btn permute-btn" onclick="permute()">🔁 กลับเลขวิน</button>
-  </div>
-
-  <!-- ปุ่มรอง -->
-  <div class="action-row">
-    <button class="btn green" style="flex:1;" onclick="copyResult()">📋 คัดลอก</button>
-    <button class="btn" style="flex:1;" onclick="clearAll()">🧹 ล้างข้อมูลทั้งหมด</button>
-  </div>
+    </div>
 </div>
 
 <script>
-    function requestTwo(){
-  let val = document.getElementById("requestNum").value.trim();
-  if(!val){ showToast("กรอกเลขก่อน"); return; }
+// ===== STORAGE =====
+const inputBox = document.getElementById("inputNumbers");
 
-  let result = val.split('').slice(0,2).join('');
-  renderResult([result]);
-  showToast("ได้ 2 ตัวแล้ว");
-}
-
-function requestThree(){
-  let val = document.getElementById("requestNum").value.trim();
-  if(!val){ showToast("กรอกเลขก่อน"); return; }
-
-  let result = val.split('').slice(0,3).join('');
-  renderResult([result]);
-  showToast("ได้ 3 ตัวแล้ว");
-}
-let currentResult=[];
-
-function showToast(msg){
-  let t=document.getElementById("toast");
-  t.innerText=msg;
-  t.classList.add("show");
-  setTimeout(()=>t.classList.remove("show"),1500);
-}
-
-function renderResult(arr){
-  currentResult=arr;
-  let box=document.getElementById("resultGrid");
-  box.innerHTML="";
-
-  arr.forEach((n,i)=>{
-    let div=document.createElement("div");
-    div.className="num";
-    div.innerText=n;
-
-    // highlight 10 ตัวแรก
-    
-
-    box.appendChild(div);
-  });
-
-  document.getElementById("countText").innerText="จำนวนชุด: "+arr.length;
-}
-
-function generateWin(len,withDouble){
-  let input=document.getElementById("inputNum").value.trim();
-  let digits=[...new Set(input.split('').filter(n=>/\d/.test(n)))];
-
-  if(digits.length<len){
-    showToast("เลขไม่พอ");
-    return;
-  }
-
-  let result=[];
-
-  function combine(arr,len,start=0,prefix=[]){
-    if(prefix.length===len){
-      result.push(prefix.join(''));
-      return;
-    }
-    for(let i=start;i<arr.length;i++){
-      combine(arr,len,i+1,[...prefix,arr[i]]);
-    }
-  }
-
-  combine(digits,len);
-
-  if(withDouble){
-    if(len===2) digits.forEach(d=>result.push(d+d));
-    if(len===3){
-      for(let i=0;i<digits.length;i++){
-        for(let j=0;j<digits.length;j++){
-          if(i!==j) result.push(digits[i]+digits[i]+digits[j]);
+window.onload = () => {
+    const saved = localStorage.getItem("winwai_numbers");
+    if(saved){
+        inputBox.value = saved;
+        // รายการปุ่มเมนูหลักตามรูปภาพ
+        const presets = ["ชุดหาม", "ชุดเบิ้ลหน้า", "ชุดเบิ้ลหลัง", "เลขพี่น้อง", "ชุดประหาร"];
+        if(presets.includes(saved)) {
+            const presetTypeMap = {
+                "ชุดหาม": "ham",
+                "ชุดเบิ้ลหน้า": "doubleFront",
+                "ชุดเบิ้ลหลัง": "doubleBack",
+                "เลขพี่น้อง": "sibling",
+                "ชุดประหาร": "prahan"
+            };
+            selectPreset(presetTypeMap[saved]);
+        } else if(!saved.includes("ชุด")) {
+            calculate();
+        } else {
+            // โหลดชุดข้อมูลเลขพิเศษแบบเดิม
+            const labelMap = {
+                "012n9": "ชุด 012 (ไม่มี 9)", "012": "ชุด 012", "012n49": "ชุด 012 (ไม่มี 4,9)",
+                "013": "ชุด 013", "014": "ชุด 014", "023": "ชุด 023", "024": "ชุด 024",
+                "034": "ชุด 034", "123": "ชุด 123"
+            };
+            let foundType = null;
+            for (const [type, label] of Object.entries(labelMap)) {
+                if (saved === label) {
+                    foundType = type;
+                    break;
+                }
+            }
+            if (foundType) {
+                selectSpecial(foundType);
+            }
         }
-      }
-      digits.forEach(d=>result.push(d+d+d));
     }
-  }
 
-  result=[...new Set(result)].sort();
-  renderResult(result);
-}
-
-function permute(){
-  if(currentResult.length===0){
-    showToast("ยังไม่มีผลลัพธ์");
-    return;
-  }
-
-  let set=new Set();
-
-  function perm(arr){
-    if(arr.length<=1) return [arr];
-    let res=[];
-    for(let i=0;i<arr.length;i++){
-      let rest=[...arr.slice(0,i),...arr.slice(i+1)];
-      perm(rest).forEach(p=>res.push([arr[i],...p]));
+    const dark = localStorage.getItem("darkmode");
+    if(dark === "1"){
+        document.body.classList.add("dark");
     }
-    return res;
-  }
+};
 
-  currentResult.forEach(n=>{
-    perm(n.split('')).forEach(p=>set.add(p.join('')));
-  });
-
-  renderResult([...set].sort());
-}
-
-function copyResult(){
-  if(currentResult.length===0){
-    showToast("ไม่มีข้อมูล");
-    return;
-  }
-  navigator.clipboard.writeText(currentResult.join(' '));
-  showToast("คัดลอกแล้ว");
-}
-
-function clearAll(){
-  document.getElementById("inputNum").value="";
-  document.getElementById("resultGrid").innerHTML="";
-  document.getElementById("countText").innerText="จำนวนชุด: 0";
-  currentResult=[];
-  showToast("ล้างแล้ว");
-}
-document.querySelectorAll(".btn, .permute-btn").forEach(btn=>{
-  btn.addEventListener("click", function(e){
-
-    const circle = document.createElement("span");
-    circle.classList.add("ripple");
-
-    const rect = this.getBoundingClientRect();
-    const size = Math.max(rect.width, rect.height);
-
-    circle.style.width = circle.style.height = size + "px";
-    circle.style.left = (e.clientX - rect.left - size/2) + "px";
-    circle.style.top = (e.clientY - rect.top - size/2) + "px";
-
-    this.appendChild(circle);
-
-    setTimeout(()=>circle.remove(),600);
-  });
+inputBox.addEventListener("input", () => {
+    localStorage.setItem("winwai_numbers", inputBox.value);
 });
-function isTriple(num){
-  return num[0] === num[1] && num[1] === num[2];
-}
-function showSet(type) {
-  let result = [];
 
-  if (type === 'haam') {
-    for (let i = 0; i <= 9; i++)
-      for (let j = 0; j <= 9; j++)
-        result.push(`${i}${j}${i}`);
-  }
-
-  else if (type === 'front') {
-    for (let i = 0; i <= 9; i++)
-      for (let j = 0; j <= 9; j++)
-        result.push(`${i}${i}${j}`);
-  }
-
-  else if (type === 'back') {
-    for (let i = 0; i <= 9; i++)
-      for (let j = 0; j <= 9; j++)
-        result.push(`${i}${j}${j}`);
-  }
-
-else if (type === 'siblings') {
-  result = [];
-
-  for (let i = 0; i <= 8; i++) {
-    result.push(`${i}${i + 1}`);
-  }
-
-  // ปิดรอบ 90
-  result.push('90');
+// ===== UTIL =====
+function unique(arr){
+    return [...new Set(arr)];
 }
 
-  else if (type === 'all') {
-    for (let i = 0; i <= 9; i++) {
-      for (let j = 0; j <= 9; j++) {
-        result.push(`${i}${j}${i}`);
-        result.push(`${i}${i}${j}`);
-        result.push(`${i}${j}${j}`);
-      }
+function showToast(msg = "คัดลอกแล้ว") {
+    const toast = document.getElementById("toast");
+    toast.innerText = msg;
+    toast.classList.add("show");
+    setTimeout(() => {
+        toast.classList.remove("show");
+    }, 1800);
+}
+
+function toggleDark(){
+    document.body.classList.toggle("dark");
+    localStorage.setItem("darkmode", document.body.classList.contains("dark") ? "1" : "0");
+}
+
+// คัดลอกแบบแยกชุดเฉพาะบรรทัด (เมื่อกดปุ่มย่อย)
+function copySingleLine(encodedText, setLabel) {
+    const text = decodeURIComponent(encodedText);
+    navigator.clipboard.writeText(text);
+    showToast(`คัดลอกชุดเลข ${setLabel} แล้ว`);
+}
+
+// คัดลอกทั้งหมดภายในกล่องใหญ่แบบจัดบรรทัดเรียงตัวเลขลงไป
+function copyBox(id){
+    const containerBox = document.getElementById(id);
+    const items = containerBox.querySelectorAll('.set-numbers-box');
+    
+    if(items.length === 0 && !containerBox.innerText.trim()) {
+        showToast("ไม่มีข้อมูลให้คัดลอก");
+        return;
     }
-  }
 
- result = [...new Set(result)];
+    let textToCopy = "";
+    if(items.length > 0) {
+        items.forEach(item => {
+            if(item.innerText.trim()) {
+                textToCopy += item.innerText.trim() + "\n";
+            }
+        });
+    } else {
+        textToCopy = containerBox.innerText;
+    }
 
-// ❌ ลบเลขตองออก
-result = result.filter(n => !isTriple(n));
-
-currentResult = result;
-renderResult(currentResult);
-
-document.getElementById("resultBox").scrollIntoView({
-  behavior: "smooth",
-  block: "start"
-});
-
-showToast("โหลดชุดเลขแล้ว");
+    navigator.clipboard.writeText(textToCopy.trim());
+    showToast("คัดลอกผลลัพธ์ทั้งหมดในกล่องแล้ว");
 }
 
-function copyExtraResult() {
-  if (!currentResult || currentResult.length === 0) {
-    showToast("ไม่มีข้อมูลให้คัดลอก");
-    return;
-  }
-
-  navigator.clipboard.writeText(currentResult.join(' '));
-  showToast("คัดลอกแล้ว");
+function resetAll(){
+    inputBox.value = "";
+    const boxes = ["special3", "normal2", "double2", "normal3", "ham3", "all3"];
+    boxes.forEach(id => {
+        document.getElementById(id).innerHTML = "";
+        const count = document.querySelector(`[data-count="${id}"]`);
+        if(count) count.innerText = "0 ชุด";
+    });
+    
+    showAllBoxes();
+    const cardSpecial = document.getElementById("card_special3");
+    cardSpecial.classList.remove("expanded-box");
+    cardSpecial.classList.add("hidden-box"); // ซ่อนกล่องพิเศษเมื่อเริ่มใหม่
+    
+    localStorage.removeItem("winwai_numbers");
+    showToast("ล้างข้อมูลเรียบร้อย");
 }
 
-function toggleSpecial(){
-  document
-    .getElementById("specialPanel")
-    .classList.toggle("show");
+function hideOtherBoxes() {
+    document.getElementById("card_normal2").classList.add("hidden-box");
+    document.getElementById("card_double2").classList.add("hidden-box");
+    document.getElementById("card_normal3").classList.add("hidden-box");
+    document.getElementById("card_ham3").classList.add("hidden-box");
+    document.getElementById("card_all3").classList.add("hidden-box");
 }
 
-function loadSpecial(type){
-
-  let result=[];
-
-  switch(type){
-
-    case "012":
-result=[
-"012","013","014","015","017","019",
-"023","024","025","027","029",
-"034","035","037","039",
-"045","047","049",
-"057","059","079",
-"123","124","125","127","129",
-"134","135","137","139",
-"145","147","149",
-"157","159","179",
-"234","235","237","239",
-"245","247","249",
-"257","259","279",
-"345","347","349",
-"357","359","379",
-"457","459","479","579"
-];
-break;
-
-case "012n9":
-result=[
-"012","013","014","015","016","017","018",
-"023","024","026","025","027","028","034",
-"035","036","037","038","045","047","048",
-"056","057","058","076","078","086","123",
-"124","126","127","128","134","136","135","137",
-"138","146","147","148","156","157","158","176",
-"178","234","235","236","237","238","246",
-"247","248","256","257","258","276","278",
-"346","345","347","348","356","357","358",
-"368","376","378","456","457","458","468",
-"476","478","576","578","586","678","769","869"
-];
-break;
-
-case "012n49":
-result=[
-"012","013","015","016","017","018",
-"023","025","026","027","028",
-"035","036","037","038",
-"056","057","058",
-"067","068","078",
-"123","125","126","127","128",
-"135","136","137","138",
-"156","157","158",
-"167","168","178",
-"235","236","237","238",
-"256","257","258",
-"267","268","278",
-"356","357","358",
-"367","368","378",
-"567","568","578","678"
-];
-break;
-
-case "013":
-result=[
-"013","014","016","017","018","019",
-"034","036","037","038","039",
-"046","047","048","049",
-"067","068","069","078","079",
-"089","134","136","137","138","139",
-"146","147","148","149",
-"167","168","169","178","179",
-"189","346","347","348","349",
-"367","368","369","378","379",
-"389","467","468","469","478","479",
-"489","678","679","689","789"
-];
-break;
-
-case "014":
-result=[
-"014","015","016","017","018","019",
-"045","046","047","048","049",
-"056","057","058","059",
-"067","068","069",
-"078","079","089",
-"145","146","147","148","149",
-"156","157","158","159",
-"167","168","169",
-"178","179","189",
-"456","457","458","459",
-"467","468","469",
-"478","479","489",
-"567","568","569",
-"578","579","589",
-"678","679","689","789"
-];
-break;
-
-case "023":
-result=[
-"023","024","025","026","028",
-"029","034","035","036","038",
-"039","045","046","048","049",
-"056","058","059","068","069",
-"089","234","235","236","238",
-"239","245","246","248","249",
-"256","258","259","268","269",
-"289","345","346","348","349",
-"356","358","359","368","369",
-"389","456","458","459","468",
-"469","489","568","569","589",
-"689"
-];
-break;
-
-case "024":
-result=[
-"024","025","026","027","028","029",
-"045","046","047","048","049",
-"056","057","058","059",
-"067","068","069",
-"078","079","089",
-"245","246","247","248","249",
-"256","257","258","259",
-"267","268","269",
-"278","279","289",
-"456","457","458","459",
-"467","468","469",
-"478","479","489",
-"567","568","569",
-"578","579","589",
-"678","679","689","789"
-];
-break;
-
-case "034":
-result=[
-"034","035","036","037","038","039",
-"045","046","047","048","049",
-"056","057","058","059",
-"067","068","069",
-"078","079","089",
-"345","346","347","348","349",
-"356","357","358","359",
-"367","368","369",
-"378","379","389",
-"456","457","458","459",
-"467","468","469",
-"478","479","489",
-"567","568","569",
-"578","579","589",
-"678","679","689","789"
-];
-break;
-
-case "123":
-result=[
-"123","124","125","127","128","129",
-"134","135","137","138","139",
-"145","147","148","149",
-"157","158","159",
-"178","179","189",
-"234","235","237","238","239",
-"245","247","248","249",
-"257","258","259",
-"278","279","289",
-"345","347","348","349",
-"357","358","359",
-"378","379","389",
-"457","458","459",
-"478","479","489",
-"578","579","589","789"
-];
-break;
-  }
-
-currentResult = result;
-renderResult(result);
-
-
-document.getElementById("resultBox")
-?.scrollIntoView({
-    behavior:"smooth",
-    block:"start"
-});
+function showAllBoxes() {
+    document.getElementById("card_normal2").classList.remove("hidden-box");
+    document.getElementById("card_double2").classList.remove("hidden-box");
+    document.getElementById("card_normal3").classList.remove("hidden-box");
+    document.getElementById("card_ham3").classList.remove("hidden-box");
+    document.getElementById("card_all3").classList.remove("hidden-box");
 }
 
-function openSpecialPanel(){
-  document
-    .getElementById("specialOverlay")
-    .classList.add("show");
+// ===== POPUP และฟังก์ชันควบคุมการสลับหน้า =====
+function openSpecial(){
+    showMainMenu(); // ทุกครั้งที่เปิด Popup จะรีเซ็ตกลับมาแสดงหน้าต่าง 6 ปุ่มหลักก่อน
+    document.getElementById("specialModal").classList.add("show");
 }
 
-function closeSpecialPanel(){
-  document
-    .getElementById("specialOverlay")
-    .classList.remove("show");
+function closeSpecial(){
+    document.getElementById("specialModal").classList.remove("show");
 }
-document.addEventListener("click", function(e){
 
-  const popup = document.querySelector(".special-popup");
-  const btn = document.querySelector(".special-btn");
+function showSubSpecialMenu() {
+    document.getElementById("modalMenuMain").style.display = "none";
+    document.getElementById("modalMenuSub").style.display = "block";
+}
 
-  if(
-      document.getElementById("specialOverlay")
-      .classList.contains("show")
-      &&
-      !popup.contains(e.target)
-      &&
-      !btn.contains(e.target)
-  ){
-      closeSpecialPanel();
-  }
+function showMainMenu() {
+    document.getElementById("modalMenuSub").style.display = "none";
+    document.getElementById("modalMenuMain").style.display = "block";
+}
 
-});
+// ฟังก์ชันคำนวณและแสดงผลปุ่มประเภทชุดเลข (หน้าเมนูหลัก)
+function selectPreset(presetType) {
+    const presetLabelMap = {
+        "ham": "ชุดหาม",
+        "doubleFront": "ชุดเบิ้ลหน้า",
+        "doubleBack": "ชุดเบิ้ลหลัง",
+        "sibling": "เลขพี่น้อง",
+        "prahan": "ชุดประหาร"
+    };
+    
+    const label = presetLabelMap[presetType];
+    inputBox.value = label;
+    localStorage.setItem("winwai_numbers", label);
+    closeSpecial();
 
+    hideOtherBoxes();
+    const cardSpecial = document.getElementById("card_special3");
+    cardSpecial.classList.remove("hidden-box");
+    cardSpecial.classList.add("expanded-box");
 
+    document.getElementById("special_title").innerText = `💎 ${label}`;
+
+    let resultArr = [];
+    if (presetType === "ham") {
+        // ชุดหาม 3 ตัวสลับ (ABA) 90 ชุด
+        for (let a = 0; a <= 9; a++) {
+            for (let b = 0; b <= 9; b++) {
+                if (a !== b) resultArr.push(`${a}${b}${a}`);
+            }
+        }
+    } else if (presetType === "doubleFront") {
+        // ชุดเบิ้ลหน้า 3 ตัว (AAB) 90 ชุด
+        for (let a = 0; a <= 9; a++) {
+            for (let b = 0; b <= 9; b++) {
+                if (a !== b) resultArr.push(`${a}${a}${b}`);
+            }
+        }
+    } else if (presetType === "doubleBack") {
+        // ชุดเบิ้ลหลัง 3 ตัว (ABB) 90 ชุด
+        for (let a = 0; a <= 9; a++) {
+            for (let b = 0; b <= 9; b++) {
+                if (a !== b) resultArr.push(`${a}${b}${b}`);
+            }
+        }
+    } else if (presetType === "sibling") {
+        // เลขพี่น้อง 2 ตัวบนล่างกลับ 20 ชุด
+        resultArr = ["01","09","10","12","21","23","32","34","43","45","54","56","65","67","76","78","87","89","90","98"];
+    } else if (presetType === "prahan") {
+        // ชุดประหาร (หาม 90 ตัว + เบิ้ลหน้า 90 ตัว + เบิ้ลหลัง 90 ตัว) รวม 270 ตัวตามสูตรใหม่
+        // 1. หาม
+        for (let a = 0; a <= 9; a++) {
+            for (let b = 0; b <= 9; b++) {
+                if (a !== b) resultArr.push(`${a}${b}${a}`);
+            }
+        }
+        // 2. เบิ้ลหน้า
+        for (let a = 0; a <= 9; a++) {
+            for (let b = 0; b <= 9; b++) {
+                if (a !== b) resultArr.push(`${a}${a}${b}`);
+            }
+        }
+        // 3. เบิ้ลหลัง
+        for (let a = 0; a <= 9; a++) {
+            for (let b = 0; b <= 9; b++) {
+                if (a !== b) resultArr.push(`${a}${b}${b}`);
+            }
+        }
+        resultArr.sort(); // เรียงลำดับจากน้อยไปมากเพื่อความเป็นระเบียบและอ่านง่ายขึ้น
+    }
+
+    // แสดงตัวเลขด้วยขนาด 18px ตัวบางสบายตา และเว้นช่องไฟให้อ่านง่าย
+    document.getElementById("special3").innerHTML = `<div style="padding:10px; font-size:18px; line-height:2; font-weight:400; word-spacing:4px;">${resultArr.join(" ")}</div>`;
+    document.querySelector(`[data-count="special3"]`).innerText = resultArr.length + " ชุด";
+
+    // ล้างผลลัพธ์ในกล่องปกติอื่น ๆ
+    document.getElementById("normal2").innerHTML = "";
+    document.getElementById("double2").innerHTML = "";
+    document.getElementById("normal3").innerHTML = "";
+    document.getElementById("ham3").innerHTML = "";
+    document.getElementById("all3").innerHTML = "";
+
+    document.querySelectorAll("[data-count]").forEach(c => {
+        if(c.getAttribute("data-count") !== "special3") c.innerText = "0 ชุด";
+    });
+
+    showToast(`โหลด ${label} สำเร็จ`);
+}
+
+function getSpecialResult(type) {
+    switch(type) {
+        case "012": return ["012","013","014","015","017","019","023","024","025","027","029","034","035","037","039","045","047","049","057","059","079","123","124","125","127","129","134","135","137","139","145","147","149","157","159","179","234","235","237","239","245","247","249","257","259","279","345","347","349","357","359","379","457","459","479","579"];
+        case "012n9": return ["012","013","014","015","016","017","018","023","024","026","025","027","028","034","035","036","037","038","045","047","048","056","057","058","076","078","086","123","124","126","127","128","134","136","135","137","138","146","147","148","156","157","158","176","178","234","235","236","237","238","246","247","248","256","257","258","276","278","346","345","347","348","356","357","358","368","376","378","456","457","458","468","476","478","576","578","586","678","769","869"];
+        case "012n49": return ["012","013","015","016","017","018","023","025","026","027","028","035","036","037","038","056","057","058","067","068","078","123","125","126","127","128","135","136","137","138","156","157","158","167","168","178","235","236","237","238","256","257","258","267","268","278","356","357","358","367","368","378","567","568","578","678"];
+        case "013": return ["013","014","016","017","018","019","034","036","037","038","039","046","047","048","049","067","068","069","078","079","089","134","136","137","138","139","146","147","148","149","167","168","169","178","179","189","346","347","348","349","367","368","369","378","379","389","467","468","469","478","479","489","678","679","689","789"];
+        case "014": return ["014","015","016","017","018","019","045","046","047","048","049","056","057","058","059","067","068","069","078","079","089","145","146","147","148","149","156","157","158","159","167","168","169","178","179","189","456","457","458","459","467","468","469","478","479","489","567","568","569","578","579","589","678","679","689","789"];
+        case "023": return ["023","024","025","026","028","029","034","035","036","038","039","045","046","048","049","056","058","059","068","069","089","234","235","236","238","239","245","246","248","249","256","258","259","268","269","289","345","346","348","349","356","358","359","368","369","389","456","458","459","468","469","489","568","569","589","689"];
+        case "024": return ["024","025","026","027","028","029","045","046","047","048","049","056","057","058","059","067","068","069","078","079","089","245","246","247","248","249","256","257","258","259","267","268","269","278","279","289","456","457","458","459","467","468","469","478","479","489","567","568","569","578","579","589","678","679","689","789"];
+        case "034": return ["034","035","036","037","038","039","045","046","047","048","049","056","057","058","059","067","068","069","078","079","089","345","346","347","348","349","356","357","358","359","367","368","369","378","379","389","456","457","458","459","467","468","469","478","479","489","567","568","569","578","579","589","678","679","689","789"];
+        case "123": return ["123","124","125","127","128","129","134","135","137","138","139","145","147","148","149","157","158","159","178","179","189","234","235","237","238","239","245","247","248","249","257","258","259","278","279","289","345","347","348","349","357","358","359","378","379","389","457","458","459","478","479","489","578","579","589","789"];
+    }
+    return [];
+}
+
+function selectSpecial(type) {
+    const labelMap = {
+        "012n9": "ชุด 012 (ไม่มี 9)", "012": "ชุด 012", "012n49": "ชุด 012 (ไม่มี 4,9)",
+        "013": "ชุด 013", "014": "ชุด 014", "023": "ชุด 023", "024": "ชุด 024",
+        "034": "ชุด 034", "123": "ชุด 123"
+    };
+    
+    const label = labelMap[type];
+    inputBox.value = label;
+    localStorage.setItem("winwai_numbers", label);
+    closeSpecial();
+
+    hideOtherBoxes();
+    const cardSpecial = document.getElementById("card_special3");
+    cardSpecial.classList.remove("hidden-box");
+    cardSpecial.classList.add("expanded-box");
+
+    document.getElementById("special_title").innerText = `💎 3 ตัวชุดพิเศษ: ${label}`;
+
+    const special3 = getSpecialResult(type);
+    document.getElementById("special3").innerHTML = `<div style="padding:10px; font-size:18px; line-height:2; font-weight:400; word-spacing:4px;">${special3.join(" ")}</div>`;
+    document.querySelector(`[data-count="special3"]`).innerText = special3.length + " ชุด";
+    
+    document.getElementById("normal2").innerHTML = "";
+    document.getElementById("double2").innerHTML = "";
+    document.getElementById("normal3").innerHTML = "";
+    document.getElementById("ham3").innerHTML = "";
+    document.getElementById("all3").innerHTML = "";
+
+    document.querySelectorAll("[data-count]").forEach(c => {
+        if(c.getAttribute("data-count") !== "special3") c.innerText = "0 ชุด";
+    });
+
+    showToast(`โหลด ${label} สำเร็จ`);
+}
+
+// ===== LOGIC ระบบวินเลขปกติ =====
+function get2Normal(digits){
+    const result = [];
+    for(let i = 0; i < digits.length; i++){
+        for(let j = i + 1; j < digits.length; j++){
+            result.push(digits[i] + digits[j]);
+        }
+    }
+    return result;
+}
+
+function get2Double(digits){
+    const result = [...get2Normal(digits)];
+    digits.forEach(n => { result.push(n + n); });
+    return result;
+}
+
+function get3Normal(digits){
+    const result = [];
+    for(let i = 0; i < digits.length; i++){
+        for(let j = i + 1; j < digits.length; j++){
+            for(let k = j + 1; k < digits.length; k++){
+                result.push(digits[i] + digits[j] + digits[k]);
+            }
+        }
+    }
+    return result;
+}
+
+function get3Ham(digits){
+    const pairs = get2Normal(digits);
+    const result = [];
+    pairs.forEach(pair => {
+        const a = pair[0]; const b = pair[1];
+        result.push(a + a + b); result.push(a + b + b);
+    });
+    return result;
+}
+
+function get3All(digits){
+    const result = [...get3Ham(digits)];
+    digits.forEach(n => { result.push(n + n + n); });
+    return result.sort();
+}
+
+// ===== FORMAT RENDER แยกชุดพร้อมปุ่มคัดลอกย่อยประจำชุด =====
+function buildSetHtml(labelName, itemsArray) {
+    if(itemsArray.length === 0) return "";
+    const rawText = itemsArray.join(" ");
+    const encoded = encodeURIComponent(rawText);
+    return `
+        <div class="set-row-item">
+            <div class="set-row-header">
+                <span class="set-label">📌 ชุดเลข: ${labelName} <span class="set-count">(${itemsArray.length} ชุด)</span></span>
+                <button class="btn-copy-mini" onclick="copySingleLine('${encoded}', '${labelName}')">📄 คัดลอกชุดนี้</button>
+            </div>
+            <span class="set-numbers-box">${rawText}</span>
+        </div>
+    `;
+}
+
+// ===== CALCULATE (วินแยกชุดคุมธีมเดิม) =====
+function calculate(){
+    let text = inputBox.value.trim();
+    if(!text){
+        showToast("กรุณาใส่ตัวเลข");
+        return;
+    }
+
+    const presets = ["ชุดหาม", "ชุดเบิ้ลหน้า", "ชุดเบิ้ลหลัง", "เลขพี่น้อง", "ชุดประหาร"];
+    if(presets.includes(text)) return;
+
+    // แสดงกล่องวินปกติทั้งหมด และซ่อนกล่องชุดพิเศษ
+    showAllBoxes();
+    const cardSpecial = document.getElementById("card_special3");
+    cardSpecial.classList.remove("expanded-box");
+    cardSpecial.classList.add("hidden-box");
+
+    let lines = text.split("\n");
+
+    let html_normal2 = ""; let count_normal2 = 0;
+    let html_double2 = ""; let count_double2 = 0;
+    let html_normal3 = ""; let count_normal3 = 0;
+    let html_ham3 = "";    let count_ham3 = 0;
+    let html_all3 = "";    let count_all3 = 0;
+
+    lines.forEach(line => {
+        let cleanLine = line.replace(/\D/g, "");
+        if(!cleanLine) return; 
+
+        let digits = unique(cleanLine.split("")); 
+        if(digits.length < 2) return;
+
+        let res_n2 = get2Normal(digits);
+        let res_d2 = get2Double(digits);
+        let res_n3 = digits.length >= 3 ? get3Normal(digits) : [];
+        let res_h3 = get3Ham(digits);
+        let res_a3 = get3All(digits);
+
+        // รวมจำนวนชุด
+        count_normal2 += res_n2.length;
+        count_double2 += res_d2.length;
+        count_normal3 += res_n3.length;
+        count_ham3 += res_h3.length;
+        count_all3 += res_a3.length;
+
+        // เจนสไตล์แยกชุดพร้อมปุ่มคัดลอกรายแถว
+        html_normal2 += buildSetHtml(cleanLine, res_n2);
+        html_double2 += buildSetHtml(cleanLine, res_d2);
+        html_normal3 += buildSetHtml(cleanLine, res_n3);
+        html_ham3 += buildSetHtml(cleanLine, res_h3);
+        html_all3 += buildSetHtml(cleanLine, res_a3);
+    });
+
+    // ดันผลลัพธ์ลงกล่อง UI เดิม
+    document.getElementById("special3").innerHTML = "";
+    document.querySelector(`[data-count="special3"]`).innerText = "0 ชุด";
+
+    document.getElementById("normal2").innerHTML = html_normal2 || "<div style='padding:15px;color:#999;'>ไม่มีข้อมูล</div>";
+    document.querySelector(`[data-count="normal2"]`).innerText = count_normal2 + " ชุด";
+
+    document.getElementById("double2").innerHTML = html_double2 || "<div style='padding:15px;color:#999;'>ไม่มีข้อมูล</div>";
+    document.querySelector(`[data-count="double2"]`).innerText = count_double2 + " ชุด";
+
+    document.getElementById("normal3").innerHTML = html_normal3 || "<div style='padding:15px;color:#999;'>ไม่มีข้อมูล</div>";
+    document.querySelector(`[data-count="normal3"]`).innerText = count_normal3 + " ชุด";
+
+    document.getElementById("ham3").innerHTML = html_ham3 || "<div style='padding:15px;color:#999;'>ไม่มีข้อมูล</div>";
+    document.querySelector(`[data-count="ham3"]`).innerText = count_ham3 + " ชุด";
+
+    document.getElementById("all3").innerHTML = html_all3 || "<div style='padding:15px;color:#999;'>ไม่มีข้อมูล</div>";
+    document.querySelector(`[data-count="all3"]`).innerText = count_all3 + " ชุด";
+
+    showToast("คำนวณแยกชุดสำเร็จ!");
+}
 </script>
-<div id="toast"></div>
+
 </body>
 </html>
