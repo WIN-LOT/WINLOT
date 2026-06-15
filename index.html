@@ -47,7 +47,7 @@
         }
 
         .logo {
-            font-size: 24px;
+            font-size: 28px;
             font-weight: 700;
             color: #ffffff; /* เปลี่ยนเป็นสีขาวตามภาพถ่าย */
             letter-spacing: 2px;
@@ -60,7 +60,6 @@
         .nav-right {
             display: flex;
             gap: 10px;
-            align-items: center;
         }
 
         .btn {
@@ -496,9 +495,6 @@
 <div class="navbar">
     <div class="logo">WINLOT</div>
     <div class="nav-right">
-        <span style="color: #9ca3af; font-size: 14px; background: #1f2937; padding: 6px 12px; border-radius: 8px; display: inline-flex; align-items: center; gap: 6px;">
-            🟢 กำลังใช้งาน: <span id="online_counter" style="color: #f97316; font-weight: 700;">1</span> คน
-        </span>
         <button class="btn btn-dark" onclick="toggleDark()">🌙 Dark Mode</button>
     </div>
 </div>
@@ -618,34 +614,7 @@
 // ===== STORAGE =====
 const inputBox = document.getElementById("inputNumbers");
 
-// ฟังก์ชันดึงจำนวนผู้ใช้แยกเซสชั่น/แท็บ เพื่อความแม่นยำไม่สน IP เดียวกัน
-function updateOnlineCounter() {
-    // ตรวจสอบเซสชั่นการเข้าใช้เบื้องต้น หากเป็นแท็บใหม่จะส่งขึ้นไปลงทะเบียนเพิ่ม
-    let sessionKey = "winlot_active_session";
-    let url = 'https://api.counterapi.dev/v1/winlot_live_final/counter';
-    
-    if (!sessionStorage.getItem(sessionKey)) {
-        sessionStorage.setItem(sessionKey, "active");
-        url += '/up'; // เพิ่มค่านับเครื่องใหม่ตัวนี้เข้าไปกองกลาง
-    }
-
-    fetch(url)
-        .then(res => res.json())
-        .then(data => {
-            // ดึงจำนวนนับที่อัปเดตมาโชว์บนบอร์ด
-            let currentUsers = data.value || 1;
-            document.getElementById('online_counter').innerText = currentUsers.toLocaleString();
-        })
-        .catch(err => {
-            document.getElementById('online_counter').innerText = "1";
-        });
-}
-
 window.onload = () => {
-    // สั่งรันระบบนับแยกรายเครื่องทันทีที่โหลดเสร็จ และอัปเดตข้อมูลทุกๆ 15 วินาที
-    updateOnlineCounter();
-    setInterval(updateOnlineCounter, 15000);
-
     const saved = localStorage.getItem("winwai_numbers");
     if(saved){
         inputBox.value = saved;
@@ -750,7 +719,7 @@ function copyBox(id){
     }
 
     navigator.clipboard.writeText(textToCopy.trim());
-    showToast("คัดลอกผลลัพธ์ทั้งหมดในกล่องแล้ว");
+    showToast("คัดลอกผลลัพธ์ทั้งหมดแล้ว");
 }
 
 function clearOutputBoxes() {
@@ -953,6 +922,7 @@ function get2Double(digits){
     return result;
 }
 
+// ค้นหา 3 ตัวตรงแบบไม่ซ้ำหลัก
 function get3Normal(digits){
     const result = [];
     for(let i = 0; i < digits.length; i++){
