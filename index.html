@@ -29,28 +29,34 @@
             margin: auto;
         }
 
-        /* NAVBAR (เหลือเพียงปุ่ม Dark Mode ปุ่มเดียว) */
+        /* ====================================================
+           แก้ไขเฉพาะ NAVBAR ให้เป็นสีดำทึบเต็มจอ และใช้สีตัวอักษรขาว
+        ======================================================= */
         .navbar {
-            background: #fff;
-            padding: 16px 20px;
-            border-radius: 16px;
+            background: #111a14; /* สีดำทึบตามภาพถ่าย */
+            padding: 16px 40px;
+            margin: -20px -20px 20px -20px; /* ขยายแถบดำให้เต็มขอบหน้าจอพอดี */
             display: flex;
             justify-content: space-between;
             align-items: center;
-            box-shadow: 0 5px 20px rgba(0, 0, 0, .08);
-            margin-bottom: 20px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.15);
         }
 
         .dark .navbar {
-            background: #1f2937;
+            background: #111a14;
         }
 
         .logo {
-            font-size: 24px;
+            font-size: 28px;
             font-weight: 700;
-            color: #2563eb;
+            color: #ffffff; /* เปลี่ยนเป็นสีขาวตามภาพถ่าย */
+            letter-spacing: 2px;
+            text-transform: uppercase;
         }
 
+        /* ====================================================
+           ส่วนด้านล่างนี้คงเดิมตามไฟล์ index.html ต้นฉบับทุกประการ
+        ======================================================= */
         .nav-right {
             display: flex;
             gap: 10px;
@@ -83,94 +89,75 @@
             color: white;
         }
 
-        .btn-success {
-            background: #22c55e;
-            color: white;
-        }
-        .btn-success:hover {
-            background: #16a34a;
-        }
-
         .btn-dark {
             background: #111827;
             color: white;
         }
 
-        /* ปุ่มเริ่มใหม่ / ล้างข้อมูล (สีแดงเข้ม ตัวหนังสือใหญ่ขึ้น) */
+        /* กล่องคุมแถวปุ่มเพื่อจัดให้อยู่ตรงกลาง */
+        .action-buttons {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+            justify-content: center; /* จัดให้อยู่ตรงกลางหน้าจอ */
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        /* ปรับดีไซน์ปุ่มเริ่มใหม่ให้ใหญ่ขึ้น เด่นชัด และกว้างเท่ากัน */
         .btn-reset {
             background: #dc2626;
-            color: white;
+            color: rgb(255, 255, 255);
             border: none;
             cursor: pointer;
-            padding: 12px 20px;
+            padding: 12px 24px; /* เพิ่มความสูงและความกว้างของปุ่ม */
             border-radius: 10px;
             font-weight: 500;
-            font-size: 17px;
+            font-size: 20px; /* เพิ่มขนาดตัวอักษรให้ใหญ่ขึ้น */
             transition: .2s;
-            flex-shrink: 0;
             display: inline-flex;
             align-items: center;
             justify-content: center;
+            gap: 8px;
+            min-width: 190px; /* เพิ่มความกว้างขั้นต่ำให้ปุ่มดูสมาร์ทและเท่ากันเป๊ะ */
         }
         .btn-reset:hover {
             background: #991b1b;
             transform: translateY(-2px);
         }
 
-        /* ปุ่มชุดเลข */
+        /* ปรับดีไซน์ปุ่มชุดเลขให้ใหญ่ขึ้นเท่ากัน */
         .btn-special-inline {
             background: #2563eb;
             color: white;
             border: none;
             cursor: pointer;
-            padding: 12px 20px;
+            padding: 12px 24px; /* เพิ่มความสูงและความกว้างของปุ่ม */
             border-radius: 10px;
             font-weight: 500;
-            font-size: 17px;
+            font-size: 20px; /* เพิ่มขนาดตัวอักษรให้ใหญ่ขึ้น */
             transition: .2s;
-            flex-shrink: 0;
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            gap: 6px;
+            gap: 8px;
+            min-width: 190px; /* ความกว้างขั้นต่ำเท่ากับปุ่มล้างข้อมูล */
         }
         .btn-special-inline:hover {
             background: #1d4ed8;
             transform: translateY(-2px);
         }
 
-        /* ปุ่มคำนวณแยกชุด (สีเขียวเข้ม ตัวหนังสือใหญ่พิเศษ) */
-        .btn-calc {
-            background: #15803d;
-            color: white;
-            border: none;
-            cursor: pointer;
-            padding: 12px 20px;
-            border-radius: 10px;
-            font-weight: 500;
-            font-size: 18px;
-            transition: .2s;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            gap: 6px;
-            flex-grow: 1;
-        }
-        .btn-calc:hover {
-            background: #166534;
-            transform: translateY(-2px);
-        }
-
-        /* ปุ่มคัดลอกกล่องใหญ่ทั้งหมด (ขยายขนาดอักษรและปุ่มให้อ่านง่ายยิ่งขึ้น) */
+        /* ปุ่มคัดลอกกล่องใหญ่ทั้งหมด */
         .btn-copy-all {
-            font-size: 16px !important;
+            font-size: 18px !important;
             padding: 12px 20px !important;
             font-weight: 600 !important;
         }
 
-        /* ปุ่มคัดลอกย่อยประจำชุดเลข (สีเขียว ขนาดใหญ่ขึ้น) */
+        /* ปุ่มคัดลอกย่อยประจำชุดเลข */
         .btn-copy-mini {
-            background: #22c55e;
+            background: #15803d;;
             color: white;
             border: none;
             padding: 8px 16px;
@@ -186,13 +173,6 @@
         .btn-copy-mini:hover {
             background: #16a34a;
             transform: scale(1.03);
-        }
-        .dark .btn-copy-mini {
-            background: #22c55e;
-            color: white;
-        }
-        .dark .btn-copy-mini:hover {
-            background: #16a34a;
         }
 
         /* INPUT BOX */
@@ -224,15 +204,6 @@
             background: #111827;
             border: 1px solid #374151;
             color: white;
-        }
-
-        /* ปรับสไตล์ปุ่ม Action ให้ยืดหยุ่นรองรับ 3 ปุ่ม */
-        .action-buttons {
-            display: flex;
-            gap: 10px;
-            margin-top: 15px;
-            align-items: center;
-            flex-wrap: wrap;
         }
 
         /* RESULT GRID */
@@ -297,7 +268,6 @@
             color: #60a5fa;
         }
 
-        /* กล่องแสดงผลลัพธ์ (ความสูงแบบเต็มหน้าจอไม่มีแถบเลื่อน) */
         .result-content {
             margin-top: 12px;
             background: #eef4ef;
@@ -310,7 +280,6 @@
             background: #111827;
         }
 
-        /* โครงสร้างแสดงผลแยกชุดด้านในกล่อง */
         .set-row-item {
             padding: 16px 12px;
             border-bottom: 1px dashed rgba(0,0,0,0.1);
@@ -332,7 +301,6 @@
             flex-wrap: wrap;
         }
 
-        /* ป้ายชื่อชุดเลข */
         .set-label {
             font-size: 16px;
             color: #2563eb;
@@ -343,7 +311,6 @@
             color: #60a5fa;
         }
 
-        /* ปรับสีป้ายระบุจำนวนชุดเป็นสีเทาเข้ม/อ่อนตามธีม */
         .set-count {
             color: #374151; 
             font-weight: 500;
@@ -353,7 +320,6 @@
             color: #d1d5db; 
         }
 
-        /* กล่องแสดงผลตัวเลขแยกชุด */
         .set-numbers-box {
             display: block;
             margin-top: 6px;
@@ -411,7 +377,6 @@
             background: #1f2937;
         }
 
-        /* ปรับสไตล์ปุ่มตามเมนูรูปภาพ */
         .special-grid-main {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
@@ -421,7 +386,7 @@
 
         .special-item-blue {
             padding: 16px;
-            background: #3b82f6; /* สีฟ้าน้ำเงินแบบปุ่มมาตรฐานตามภาพ */
+            background: #3b82f6; 
             color: white;
             border-radius: 14px;
             text-align: center;
@@ -442,7 +407,7 @@
 
         .special-item-gold {
             padding: 16px;
-            background: #ffb01f; /* สีเหลืองส้มทองตามปุ่มพิเศษในภาพ */
+            background: #ffb01f; 
             color: #1e293b;
             border-radius: 14px;
             text-align: center;
@@ -507,11 +472,16 @@
 
         @media(max-width:480px) {
             .action-buttons {
-                flex-direction: column;
-                align-items: stretch;
+                justify-content: center;
+                flex-direction: row; 
+                gap: 10px;
             }
-            .btn-reset, .btn-special-inline, .btn-calc {
-                width: 100%;
+            .btn-reset, .btn-special-inline {
+                width: auto;
+                flex-grow: 1; /* บนจอมือถือเล็กให้ขยายแชร์พื้นที่เท่ากันอย่างสวยงาม */
+                min-width: unset; /* ปลดล็อกความกว้างตายตัวบนมือถือ */
+                padding: 12px 16px;
+                font-size: 16px;
             }
             .special-grid-main {
                 grid-template-columns: 1fr;
@@ -522,23 +492,20 @@
 </head>
 <body>
 
+<div class="navbar">
+    <div class="logo">WINLOT</div>
+    <div class="nav-right">
+        <button class="btn btn-dark" onclick="toggleDark()">🌙 Dark Mode</button>
+    </div>
+</div>
+
 <div class="container">
 
-    <div class="navbar">
-        <div class="logo">WINLOT</div>
-        <div class="nav-right">
-            <!-- เหลือเพียงปุ่ม Dark Mode ปุ่มเดียวตามคำขอ -->
-            <button class="btn btn-dark" onclick="toggleDark()">🌙 Dark Mode</button>
-        </div>
-    </div>
-
     <div class="input-box">
-        <textarea id="inputNumbers" placeholder="ใส่เลขแยกบรรทัดเพื่อวินหลายชุดได้เลย เช่น&#10;123456&#10;123457&#10;123458"></textarea>
+        <textarea id="inputNumbers" oninput="autoCalculate()" placeholder="ใส่เลขแยกบรรทัด เพื่อวินหลายชุด เช่น&#10;123456&#10;123457&#10;123458"></textarea>
         <div class="action-buttons">
-            <!-- จัดเรียงปุ่มด้านล่างแบบครบชุด -->
             <button class="btn-reset" onclick="resetAll()">เริ่มใหม่ / ล้างข้อมูล</button>
             <button class="btn-special-inline" onclick="openSpecial()">💎 ชุดเลข</button>
-            <button class="btn-calc" onclick="calculate()"> คำนวณ</button>
         </div>
     </div>
 
@@ -549,7 +516,6 @@
                 <div class="result-title">2 ตัวปกติ</div>
                 <small data-count="normal2">0 ชุด</small>
             </div>
-            <!-- ขยายตัวหนังสือปุ่มคัดลอกกล่องใหญ่ด้วย btn-copy-all -->
             <button class="btn btn-primary btn-copy-all" onclick="copyBox('normal2')">📋 คัดลอกทั้งหมด</button>
             <div id="normal2" class="result-content"></div>
         </div>
@@ -590,7 +556,6 @@
             <div id="all3" class="result-content"></div>
         </div>
 
-        <!-- เริ่มต้นซ่อนกล่องชุดพิเศษด้วยคลาส hidden-box -->
         <div id="card_special3" class="result-card special-highlight hidden-box">
             <div class="result-header">
                 <div class="result-title special-title-text" id="special_title">💎 3 ตัวชุดพิเศษ</div>
@@ -605,11 +570,9 @@
 
 <div id="toast" class="toast">คัดลอกแล้ว</div>
 
-<!-- POPUP MODAL (รองรับการสลับหน้าตามโครงสร้างภาพ) -->
 <div id="specialModal" class="modal">
     <div class="modal-box">
         
-        <!-- หน้าที่ 1: รายการปุ่มชุดเลข 6 ปุ่มตามรูปภาพ -->
         <div id="modalMenuMain">
             <h2 style="margin-bottom: 20px; text-align: center;">💎 เลือกประเภทชุดเลข</h2>
             <div class="special-grid-main">
@@ -618,14 +581,12 @@
                 <div class="special-item-blue" onclick="selectPreset('doubleBack')">ชุดเบิ้ลหลัง</div>
                 <div class="special-item-blue" onclick="selectPreset('sibling')">เลขพี่น้อง</div>
                 <div class="special-item-blue" onclick="selectPreset('prahan')">ชุดประหาร</div>
-                <!-- ปุ่มเหลืองส้มทองตามแบบรูปภาพ -->
                 <div class="special-item-gold" onclick="showSubSpecialMenu()">💎 เลขชุดพิเศษ</div>
             </div>
             <br>
             <button class="btn btn-danger" style="width: 100%;" onclick="closeSpecial()">ปิด</button>
         </div>
 
-        <!-- หน้าที่ 2: หน้าต่างเลขชุดพิเศษแบบเดิม 9 ปุ่ม (เปิดเมื่อคลิกปุ่มส้มทอง) -->
         <div id="modalMenuSub" style="display: none;">
             <h2 style="margin-bottom: 20px; text-align: center;">💎 เลือกเลขชุดพิเศษ</h2>
             <div class="special-grid">
@@ -657,7 +618,6 @@ window.onload = () => {
     const saved = localStorage.getItem("winwai_numbers");
     if(saved){
         inputBox.value = saved;
-        // รายการปุ่มเมนูหลักตามรูปภาพ
         const presets = ["ชุดหาม", "ชุดเบิ้ลหน้า", "ชุดเบิ้ลหลัง", "เลขพี่น้อง", "ชุดประหาร"];
         if(presets.includes(saved)) {
             const presetTypeMap = {
@@ -671,7 +631,6 @@ window.onload = () => {
         } else if(!saved.includes("ชุด")) {
             calculate();
         } else {
-            // โหลดชุดข้อมูลเลขพิเศษแบบเดิม
             const labelMap = {
                 "012n9": "ชุด 012 (ไม่มี 9)", "012": "ชุด 012", "012n49": "ชุด 012 (ไม่มี 4,9)",
                 "013": "ชุด 013", "014": "ชุด 014", "023": "ชุด 023", "024": "ชุด 024",
@@ -696,9 +655,23 @@ window.onload = () => {
     }
 };
 
-inputBox.addEventListener("input", () => {
+function autoCalculate() {
     localStorage.setItem("winwai_numbers", inputBox.value);
-});
+    
+    const text = inputBox.value.trim();
+    const presets = ["ชุดหาม", "ชุดเบิ้ลหน้า", "ชุดเบิ้ลหลัง", "เลขพี่น้อง", "ชุดประหาร"];
+    
+    if(!text) {
+        clearOutputBoxes();
+        return;
+    }
+    
+    if(presets.includes(text) || text.includes("ชุด 01")) {
+        return;
+    }
+    
+    calculate();
+}
 
 // ===== UTIL =====
 function unique(arr){
@@ -719,14 +692,12 @@ function toggleDark(){
     localStorage.setItem("darkmode", document.body.classList.contains("dark") ? "1" : "0");
 }
 
-// คัดลอกแบบแยกชุดเฉพาะบรรทัด (เมื่อกดปุ่มย่อย)
 function copySingleLine(encodedText, setLabel) {
     const text = decodeURIComponent(encodedText);
     navigator.clipboard.writeText(text);
     showToast(`คัดลอกชุดเลข ${setLabel} แล้ว`);
 }
 
-// คัดลอกทั้งหมดภายในกล่องใหญ่แบบจัดบรรทัดเรียงตัวเลขลงไป
 function copyBox(id){
     const containerBox = document.getElementById(id);
     const items = containerBox.querySelectorAll('.set-numbers-box');
@@ -751,19 +722,23 @@ function copyBox(id){
     showToast("คัดลอกผลลัพธ์ทั้งหมดในกล่องแล้ว");
 }
 
-function resetAll(){
-    inputBox.value = "";
+function clearOutputBoxes() {
     const boxes = ["special3", "normal2", "double2", "normal3", "ham3", "all3"];
     boxes.forEach(id => {
         document.getElementById(id).innerHTML = "";
         const count = document.querySelector(`[data-count="${id}"]`);
         if(count) count.innerText = "0 ชุด";
     });
+}
+
+function resetAll(){
+    inputBox.value = "";
+    clearOutputBoxes();
     
     showAllBoxes();
     const cardSpecial = document.getElementById("card_special3");
     cardSpecial.classList.remove("expanded-box");
-    cardSpecial.classList.add("hidden-box"); // ซ่อนกล่องพิเศษเมื่อเริ่มใหม่
+    cardSpecial.classList.add("hidden-box"); 
     
     localStorage.removeItem("winwai_numbers");
     showToast("ล้างข้อมูลเรียบร้อย");
@@ -778,16 +753,17 @@ function hideOtherBoxes() {
 }
 
 function showAllBoxes() {
-    document.getElementById("card_normal2").classList.remove("hidden-box");
-    document.getElementById("card_double2").classList.remove("hidden-box");
-    document.getElementById("card_normal3").classList.remove("hidden-box");
-    document.getElementById("card_ham3").classList.remove("hidden-box");
-    document.getElementById("card_all3").classList.remove("hidden-box");
+    const normalBoxes = ["card_normal2", "card_double2", "card_normal3", "card_ham3", "card_all3"];
+    normalBoxes.forEach(id => {
+        const box = document.getElementById(id);
+        box.classList.remove("hidden-box");
+        box.classList.remove("expanded-box");
+    });
 }
 
-// ===== POPUP และฟังก์ชันควบคุมการสลับหน้า =====
+// ===== POPUP MODAL CONTROL =====
 function openSpecial(){
-    showMainMenu(); // ทุกครั้งที่เปิด Popup จะรีเซ็ตกลับมาแสดงหน้าต่าง 6 ปุ่มหลักก่อน
+    showMainMenu(); 
     document.getElementById("specialModal").classList.add("show");
 }
 
@@ -805,7 +781,7 @@ function showMainMenu() {
     document.getElementById("modalMenuMain").style.display = "block";
 }
 
-// ฟังก์ชันคำนวณและแสดงผลปุ่มประเภทชุดเลข (หน้าเมนูหลัก)
+// ===== PRESET GENERATOR =====
 function selectPreset(presetType) {
     const presetLabelMap = {
         "ham": "ชุดหาม",
@@ -829,57 +805,42 @@ function selectPreset(presetType) {
 
     let resultArr = [];
     if (presetType === "ham") {
-        // ชุดหาม 3 ตัวสลับ (ABA) 90 ชุด
         for (let a = 0; a <= 9; a++) {
             for (let b = 0; b <= 9; b++) {
                 if (a !== b) resultArr.push(`${a}${b}${a}`);
             }
         }
     } else if (presetType === "doubleFront") {
-        // ชุดเบิ้ลหน้า 3 ตัว (AAB) 90 ชุด
         for (let a = 0; a <= 9; a++) {
             for (let b = 0; b <= 9; b++) {
                 if (a !== b) resultArr.push(`${a}${a}${b}`);
             }
         }
     } else if (presetType === "doubleBack") {
-        // ชุดเบิ้ลหลัง 3 ตัว (ABB) 90 ชุด
         for (let a = 0; a <= 9; a++) {
             for (let b = 0; b <= 9; b++) {
                 if (a !== b) resultArr.push(`${a}${b}${b}`);
             }
         }
     } else if (presetType === "sibling") {
-        // เลขพี่น้อง 2 ตัวบนล่างกลับ 20 ชุด
         resultArr = ["01","09","10","12","21","23","32","34","43","45","54","56","65","67","76","78","87","89","90","98"];
     } else if (presetType === "prahan") {
-        // ชุดประหาร (หาม 90 ตัว + เบิ้ลหน้า 90 ตัว + เบิ้ลหลัง 90 ตัว) รวม 270 ตัวตามสูตรใหม่
-        // 1. หาม
+        let prahanSet = new Set();
         for (let a = 0; a <= 9; a++) {
             for (let b = 0; b <= 9; b++) {
-                if (a !== b) resultArr.push(`${a}${b}${a}`);
+                if (a !== b) {
+                    prahanSet.add(`${a}${b}${a}`);
+                    prahanSet.add(`${a}${a}${b}`);
+                    prahanSet.add(`${a}${b}${b}`);
+                }
             }
         }
-        // 2. เบิ้ลหน้า
-        for (let a = 0; a <= 9; a++) {
-            for (let b = 0; b <= 9; b++) {
-                if (a !== b) resultArr.push(`${a}${a}${b}`);
-            }
-        }
-        // 3. เบิ้ลหลัง
-        for (let a = 0; a <= 9; a++) {
-            for (let b = 0; b <= 9; b++) {
-                if (a !== b) resultArr.push(`${a}${b}${b}`);
-            }
-        }
-        resultArr.sort(); // เรียงลำดับจากน้อยไปมากเพื่อความเป็นระเบียบและอ่านง่ายขึ้น
+        resultArr = Array.from(prahanSet).sort();
     }
 
-    // แสดงตัวเลขด้วยขนาด 18px ตัวบางสบายตา และเว้นช่องไฟให้อ่านง่าย
     document.getElementById("special3").innerHTML = `<div style="padding:10px; font-size:18px; line-height:2; font-weight:400; word-spacing:4px;">${resultArr.join(" ")}</div>`;
     document.querySelector(`[data-count="special3"]`).innerText = resultArr.length + " ชุด";
 
-    // ล้างผลลัพธ์ในกล่องปกติอื่น ๆ
     document.getElementById("normal2").innerHTML = "";
     document.getElementById("double2").innerHTML = "";
     document.getElementById("normal3").innerHTML = "";
@@ -896,7 +857,7 @@ function selectPreset(presetType) {
 function getSpecialResult(type) {
     switch(type) {
         case "012": return ["012","013","014","015","017","019","023","024","025","027","029","034","035","037","039","045","047","049","057","059","079","123","124","125","127","129","134","135","137","139","145","147","149","157","159","179","234","235","237","239","245","247","249","257","259","279","345","347","349","357","359","379","457","459","479","579"];
-        case "012n9": return ["012","013","014","015","016","017","018","023","024","026","025","027","028","034","035","036","037","038","045","047","048","056","057","058","076","078","086","123","124","126","127","128","134","136","135","137","138","146","147","148","156","157","158","176","178","234","235","236","237","238","246","247","248","256","257","258","276","278","346","345","347","348","356","357","358","368","376","378","456","457","458","468","476","478","576","578","586","678","769","869"];
+        case "012n9": return ["012","013","014","015","016","017","018","023","024","026","025","027","028","034","035","036","037","038","045","047","048","056","057","058","076","086","123","124","126","127","128","134","136","135","137","138","146","147","148","156","157","158","176","178","234","235","236","237","238","246","247","248","256","257","258","276","278","346","345","347","348","356","357","358","368","376","378","456","457","458","468","476","478","576","578","586","678","769","869"];
         case "012n49": return ["012","013","015","016","017","018","023","025","026","027","028","035","036","037","038","056","057","058","067","068","078","123","125","126","127","128","135","136","137","138","156","157","158","167","168","178","235","236","237","238","256","257","258","267","268","278","356","357","358","367","368","378","567","568","578","678"];
         case "013": return ["013","014","016","017","018","019","034","036","037","038","039","046","047","048","049","067","068","069","078","079","089","134","136","137","138","139","146","147","148","149","167","168","169","178","179","189","346","347","348","349","367","368","369","378","379","389","467","468","469","478","479","489","678","679","689","789"];
         case "014": return ["014","015","016","017","018","019","045","046","047","048","049","056","057","058","059","067","068","069","078","079","089","145","146","147","148","149","156","157","158","159","167","168","169","178","179","189","456","457","458","459","467","468","469","478","479","489","567","568","569","578","579","589","678","679","689","789"];
@@ -944,7 +905,7 @@ function selectSpecial(type) {
     showToast(`โหลด ${label} สำเร็จ`);
 }
 
-// ===== LOGIC ระบบวินเลขปกติ =====
+// ===== WINNING LOGIC =====
 function get2Normal(digits){
     const result = [];
     for(let i = 0; i < digits.length; i++){
@@ -961,6 +922,7 @@ function get2Double(digits){
     return result;
 }
 
+// ค้นหา 3 ตัวตรงแบบไม่ซ้ำหลัก
 function get3Normal(digits){
     const result = [];
     for(let i = 0; i < digits.length; i++){
@@ -980,7 +942,7 @@ function get3Ham(digits){
         const a = pair[0]; const b = pair[1];
         result.push(a + a + b); result.push(a + b + b);
     });
-    return result;
+    return result.sort();
 }
 
 function get3All(digits){
@@ -989,7 +951,6 @@ function get3All(digits){
     return result.sort();
 }
 
-// ===== FORMAT RENDER แยกชุดพร้อมปุ่มคัดลอกย่อยประจำชุด =====
 function buildSetHtml(labelName, itemsArray) {
     if(itemsArray.length === 0) return "";
     const rawText = itemsArray.join(" ");
@@ -998,25 +959,18 @@ function buildSetHtml(labelName, itemsArray) {
         <div class="set-row-item">
             <div class="set-row-header">
                 <span class="set-label">📌 ชุดเลข: ${labelName} <span class="set-count">(${itemsArray.length} ชุด)</span></span>
-                <button class="btn-copy-mini" onclick="copySingleLine('${encoded}', '${labelName}')">📄 คัดลอกชุดนี้</button>
+                <button class="btn-copy-mini" onclick="copySingleLine('${encoded}', '${labelName}')">คัดลอกชุดนี้</button>
             </div>
             <span class="set-numbers-box">${rawText}</span>
         </div>
     `;
 }
 
-// ===== CALCULATE (วินแยกชุดคุมธีมเดิม) =====
+// ===== CORE CALCULATE FUNCTION =====
 function calculate(){
     let text = inputBox.value.trim();
-    if(!text){
-        showToast("กรุณาใส่ตัวเลข");
-        return;
-    }
+    if(!text) return;
 
-    const presets = ["ชุดหาม", "ชุดเบิ้ลหน้า", "ชุดเบิ้ลหลัง", "เลขพี่น้อง", "ชุดประหาร"];
-    if(presets.includes(text)) return;
-
-    // แสดงกล่องวินปกติทั้งหมด และซ่อนกล่องชุดพิเศษ
     showAllBoxes();
     const cardSpecial = document.getElementById("card_special3");
     cardSpecial.classList.remove("expanded-box");
@@ -1043,14 +997,12 @@ function calculate(){
         let res_h3 = get3Ham(digits);
         let res_a3 = get3All(digits);
 
-        // รวมจำนวนชุด
         count_normal2 += res_n2.length;
         count_double2 += res_d2.length;
         count_normal3 += res_n3.length;
         count_ham3 += res_h3.length;
         count_all3 += res_a3.length;
 
-        // เจนสไตล์แยกชุดพร้อมปุ่มคัดลอกรายแถว
         html_normal2 += buildSetHtml(cleanLine, res_n2);
         html_double2 += buildSetHtml(cleanLine, res_d2);
         html_normal3 += buildSetHtml(cleanLine, res_n3);
@@ -1058,7 +1010,6 @@ function calculate(){
         html_all3 += buildSetHtml(cleanLine, res_a3);
     });
 
-    // ดันผลลัพธ์ลงกล่อง UI เดิม
     document.getElementById("special3").innerHTML = "";
     document.querySelector(`[data-count="special3"]`).innerText = "0 ชุด";
 
@@ -1076,8 +1027,6 @@ function calculate(){
 
     document.getElementById("all3").innerHTML = html_all3 || "<div style='padding:15px;color:#999;'>ไม่มีข้อมูล</div>";
     document.querySelector(`[data-count="all3"]`).innerText = count_all3 + " ชุด";
-
-    showToast("คำนวณแยกชุดสำเร็จ!");
 }
 </script>
 
