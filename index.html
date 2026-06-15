@@ -618,15 +618,23 @@
 // ===== STORAGE =====
 const inputBox = document.getElementById("inputNumbers");
 
-// ฟังก์ชันดึงจำนวนคนออนไลน์เรียลไทม์
+// ฟังก์ชันดึงจำนวนผู้ใช้แยกเซสชั่น/แท็บ เพื่อความแม่นยำไม่สน IP เดียวกัน
 function updateOnlineCounter() {
-    // ใช้ API ดึงค่าแบบรักษาสถานะคนออนไลน์ (สุ่ม ID เฉพาะของโปรแกรมนี้)
-    fetch('https://api.counterapi.dev/v1/winlot_live_users/online/up')
+    // ตรวจสอบเซสชั่นการเข้าใช้เบื้องต้น หากเป็นแท็บใหม่จะส่งขึ้นไปลงทะเบียนเพิ่ม
+    let sessionKey = "winlot_active_session";
+    let url = 'https://api.counterapi.dev/v1/winlot_live_final/counter';
+    
+    if (!sessionStorage.getItem(sessionKey)) {
+        sessionStorage.setItem(sessionKey, "active");
+        url += '/up'; // เพิ่มค่านับเครื่องใหม่ตัวนี้เข้าไปกองกลาง
+    }
+
+    fetch(url)
         .then(res => res.json())
         .then(data => {
-            // ดึงค่าจำนวนคนกำลังใช้งาน ณ ปัจจุบันมาแสดงผล (ถ้าไม่มีใคร ระบบจะรีเซ็ตค่าลงตามเวลา)
-            let onlineUsers = data.value || 1;
-            document.getElementById('online_counter').innerText = onlineUsers.toLocaleString();
+            // ดึงจำนวนนับที่อัปเดตมาโชว์บนบอร์ด
+            let currentUsers = data.value || 1;
+            document.getElementById('online_counter').innerText = currentUsers.toLocaleString();
         })
         .catch(err => {
             document.getElementById('online_counter').innerText = "1";
@@ -634,9 +642,9 @@ function updateOnlineCounter() {
 }
 
 window.onload = () => {
-    // เรียกใช้ระบบนับคนออนไลน์ทันทีตอนเปิดเว็บ และตั้งให้คอยอัปเดตทุก ๆ 20 วินาที
+    // สั่งรันระบบนับแยกรายเครื่องทันทีที่โหลดเสร็จ และอัปเดตข้อมูลทุกๆ 15 วินาที
     updateOnlineCounter();
-    setInterval(updateOnlineCounter, 20000);
+    setInterval(updateOnlineCounter, 15000);
 
     const saved = localStorage.getItem("winwai_numbers");
     if(saved){
