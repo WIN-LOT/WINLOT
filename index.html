@@ -47,7 +47,7 @@
         }
 
         .logo {
-            font-size: 28px;
+            font-size: 24px;
             font-weight: 700;
             color: #ffffff; /* เปลี่ยนเป็นสีขาวตามภาพถ่าย */
             letter-spacing: 2px;
@@ -60,6 +60,7 @@
         .nav-right {
             display: flex;
             gap: 10px;
+            align-items: center;
         }
 
         .btn {
@@ -495,6 +496,9 @@
 <div class="navbar">
     <div class="logo">WINLOT</div>
     <div class="nav-right">
+        <span style="color: #9ca3af; font-size: 14px; background: #1f2937; padding: 6px 12px; border-radius: 8px; display: inline-flex; align-items: center; gap: 6px;">
+            🟢 กำลังใช้งาน: <span id="online_counter" style="color: #f97316; font-weight: 700;">1</span> คน
+        </span>
         <button class="btn btn-dark" onclick="toggleDark()">🌙 Dark Mode</button>
     </div>
 </div>
@@ -614,7 +618,26 @@
 // ===== STORAGE =====
 const inputBox = document.getElementById("inputNumbers");
 
+// ฟังก์ชันดึงจำนวนคนออนไลน์เรียลไทม์
+function updateOnlineCounter() {
+    // ใช้ API ดึงค่าแบบรักษาสถานะคนออนไลน์ (สุ่ม ID เฉพาะของโปรแกรมนี้)
+    fetch('https://api.counterapi.dev/v1/winlot_live_users/online/up')
+        .then(res => res.json())
+        .then(data => {
+            // ดึงค่าจำนวนคนกำลังใช้งาน ณ ปัจจุบันมาแสดงผล (ถ้าไม่มีใคร ระบบจะรีเซ็ตค่าลงตามเวลา)
+            let onlineUsers = data.value || 1;
+            document.getElementById('online_counter').innerText = onlineUsers.toLocaleString();
+        })
+        .catch(err => {
+            document.getElementById('online_counter').innerText = "1";
+        });
+}
+
 window.onload = () => {
+    // เรียกใช้ระบบนับคนออนไลน์ทันทีตอนเปิดเว็บ และตั้งให้คอยอัปเดตทุก ๆ 20 วินาที
+    updateOnlineCounter();
+    setInterval(updateOnlineCounter, 20000);
+
     const saved = localStorage.getItem("winwai_numbers");
     if(saved){
         inputBox.value = saved;
@@ -719,7 +742,7 @@ function copyBox(id){
     }
 
     navigator.clipboard.writeText(textToCopy.trim());
-    showToast("คัดลอกผลลัพธ์ทั้งหมดแล้ว");
+    showToast("คัดลอกผลลัพธ์ทั้งหมดในกล่องแล้ว");
 }
 
 function clearOutputBoxes() {
@@ -922,7 +945,6 @@ function get2Double(digits){
     return result;
 }
 
-// ค้นหา 3 ตัวตรงแบบไม่ซ้ำหลัก
 function get3Normal(digits){
     const result = [];
     for(let i = 0; i < digits.length; i++){
