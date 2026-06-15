@@ -1,0 +1,482 @@
+* {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Kanit', sans-serif;
+        }
+
+        body {
+            background: #f3f5f7;
+            padding: 20px;
+            transition: .3s;
+        }
+
+        body.dark {
+            background: #111827;
+            color: #fff;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: auto;
+        }
+
+        /* ====================================================
+           แก้ไขเฉพาะ NAVBAR ให้เป็นสีดำทึบเต็มจอ และใช้สีตัวอักษรขาว
+        ======================================================= */
+        .navbar {
+            background: #111a14; /* สีดำทึบตามภาพถ่าย */
+            padding: 16px 40px;
+            margin: -20px -20px 20px -20px; /* ขยายแถบดำให้เต็มขอบหน้าจอพอดี */
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.15);
+        }
+
+        .dark .navbar {
+            background: #111a14;
+        }
+
+        .logo {
+            font-size: 28px;
+            font-weight: 700;
+            color: #ffffff; /* เปลี่ยนเป็นสีขาวตามภาพถ่าย */
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        /* ====================================================
+           ส่วนด้านล่างนี้คงเดิมตามไฟล์ index.html ต้นฉบับทุกประการ
+        ======================================================= */
+        .nav-right {
+            display: flex;
+            gap: 10px;
+        }
+
+        .btn {
+            border: none;
+            cursor: pointer;
+            padding: 10px 16px;
+            border-radius: 10px;
+            font-weight: 500;
+            transition: .2s;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+        }
+
+        .btn-primary {
+            background: #2563eb;
+            color: white;
+        }
+
+        .btn-danger {
+            background: #ef4444;
+            color: white;
+        }
+
+        .btn-dark {
+            background: #111827;
+            color: white;
+        }
+
+        /* กล่องคุมแถวปุ่มเพื่อจัดให้อยู่ตรงกลาง */
+        .action-buttons {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+            justify-content: center; /* จัดให้อยู่ตรงกลางหน้าจอ */
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        /* ปรับดีไซน์ปุ่มเริ่มใหม่ให้ใหญ่ขึ้น เด่นชัด และกว้างเท่ากัน */
+        .btn-reset {
+            background: #dc2626;
+            color: rgb(255, 255, 255);
+            border: none;
+            cursor: pointer;
+            padding: 12px 24px; /* เพิ่มความสูงและความกว้างของปุ่ม */
+            border-radius: 10px;
+            font-weight: 500;
+            font-size: 20px; /* เพิ่มขนาดตัวอักษรให้ใหญ่ขึ้น */
+            transition: .2s;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            min-width: 190px; /* เพิ่มความกว้างขั้นต่ำให้ปุ่มดูสมาร์ทและเท่ากันเป๊ะ */
+        }
+        .btn-reset:hover {
+            background: #991b1b;
+            transform: translateY(-2px);
+        }
+
+        /* ปรับดีไซน์ปุ่มชุดเลขให้ใหญ่ขึ้นเท่ากัน */
+        .btn-special-inline {
+            background: #2563eb;
+            color: white;
+            border: none;
+            cursor: pointer;
+            padding: 12px 24px; /* เพิ่มความสูงและความกว้างของปุ่ม */
+            border-radius: 10px;
+            font-weight: 500;
+            font-size: 20px; /* เพิ่มขนาดตัวอักษรให้ใหญ่ขึ้น */
+            transition: .2s;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            min-width: 190px; /* ความกว้างขั้นต่ำเท่ากับปุ่มล้างข้อมูล */
+        }
+        .btn-special-inline:hover {
+            background: #1d4ed8;
+            transform: translateY(-2px);
+        }
+
+        /* ปุ่มคัดลอกกล่องใหญ่ทั้งหมด */
+        .btn-copy-all {
+            font-size: 18px !important;
+            padding: 12px 20px !important;
+            font-weight: 600 !important;
+        }
+
+        /* ปุ่มคัดลอกย่อยประจำชุดเลข */
+        .btn-copy-mini {
+            background: #15803d;;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            font-size: 15px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: 0.2s;
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+        }
+        .btn-copy-mini:hover {
+            background: #16a34a;
+            transform: scale(1.03);
+        }
+
+        /* INPUT BOX */
+        .input-box {
+            background: white;
+            padding: 20px;
+            border-radius: 16px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, .08);
+            margin-bottom: 25px;
+        }
+
+        .dark .input-box {
+            background: #1f2937;
+        }
+
+        textarea {
+            width: 100%;
+            height: 150px;
+            border: 1px solid #ddd;
+            border-radius: 12px;
+            padding: 15px;
+            resize: none;
+            font-size: 18px;
+            font-weight: 500;
+            letter-spacing: 1px;
+        }
+
+        .dark textarea {
+            background: #111827;
+            border: 1px solid #374151;
+            color: white;
+        }
+
+        /* RESULT GRID */
+        .result-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+        }
+
+        .result-card {
+            background: white;
+            border-radius: 16px;
+            padding: 18px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, .08);
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            transition: all 0.3s ease;
+        }
+
+        .dark .result-card {
+            background: #1f2937;
+        }
+
+        .result-card.special-highlight {
+            border: 3px solid #2563eb;
+            box-shadow: 0 0 25px rgba(37, 99, 235, 0.25);
+            background: #f8fafc;
+        }
+        
+        .dark .result-card.special-highlight {
+            border: 3px solid #3b82f6;
+            box-shadow: 0 0 25px rgba(59, 130, 246, 0.3);
+            background: #1e293b;
+        }
+
+        .result-card.expanded-box {
+            grid-column: span 2;
+        }
+
+        .result-card.hidden-box {
+            display: none !important;
+        }
+
+        .result-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 12px;
+        }
+
+        .result-title {
+            font-size: 18px;
+            font-weight: 700;
+        }
+
+        .special-title-text {
+            color: #2563eb;
+            font-size: 20px;
+        }
+        .dark .special-title-text {
+            color: #60a5fa;
+        }
+
+        .result-content {
+            margin-top: 12px;
+            background: #eef4ef;
+            border-radius: 12px;
+            min-height: 140px;
+            padding: 5px;
+        }
+
+        .dark .result-content {
+            background: #111827;
+        }
+
+        .set-row-item {
+            padding: 16px 12px;
+            border-bottom: 1px dashed rgba(0,0,0,0.1);
+            word-wrap: break-word;
+        }
+        .dark .set-row-item {
+            border-bottom: 1px dashed rgba(255,255,255,0.1);
+        }
+        .set-row-item:last-child {
+            border-bottom: none;
+        }
+
+        .set-row-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 8px;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .set-label {
+            font-size: 16px;
+            color: #2563eb;
+            font-weight: 700;
+            text-transform: uppercase;
+        }
+        .dark .set-label {
+            color: #60a5fa;
+        }
+
+        .set-count {
+            color: #374151; 
+            font-weight: 500;
+            text-transform: none;
+        }
+        .dark .set-count {
+            color: #d1d5db; 
+        }
+
+        .set-numbers-box {
+            display: block;
+            margin-top: 6px;
+            font-size: 18px;       
+            line-height: 2;        
+            letter-spacing: 0.5px;  
+            word-spacing: 4px;     
+            font-weight: 400;      
+        }
+
+        /* TOAST */
+        .toast {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: #22c55e;
+            color: white;
+            padding: 12px 20px;
+            border-radius: 10px;
+            opacity: 0;
+            pointer-events: none;
+            transition: .3s;
+            z-index: 9999;
+            font-weight: 500;
+        }
+
+        .toast.show {
+            opacity: 1;
+        }
+
+        /* POPUP MODAL */
+        .modal {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, .6);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 999;
+        }
+
+        .modal.show {
+            display: flex;
+        }
+
+        .modal-box {
+            background: white;
+            padding: 25px;
+            width: 90%;
+            max-width: 700px;
+            border-radius: 16px;
+        }
+
+        .dark .modal-box {
+            background: #1f2937;
+        }
+
+        .special-grid-main {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            margin-top: 15px;
+        }
+
+        .special-item-blue {
+            padding: 16px;
+            background: #3b82f6; 
+            color: white;
+            border-radius: 14px;
+            text-align: center;
+            cursor: pointer;
+            font-size: 18px;
+            font-weight: 700;
+            box-shadow: 0 4px 10px rgba(59, 130, 246, 0.3);
+            transition: .2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .special-item-blue:hover {
+            background: #2563eb;
+            transform: translateY(-2px);
+        }
+
+        .special-item-gold {
+            padding: 16px;
+            background: #ffb01f; 
+            color: #1e293b;
+            border-radius: 14px;
+            text-align: center;
+            cursor: pointer;
+            font-size: 18px;
+            font-weight: 700;
+            box-shadow: 0 4px 10px rgba(255, 176, 31, 0.3);
+            transition: .2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .special-item-gold:hover {
+            background: #f59e0b;
+            transform: translateY(-2px);
+        }
+
+        .special-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+            gap: 10px;
+            margin-top: 15px;
+        }
+
+        .special-item {
+            padding: 12px;
+            background: #f3f4f6;
+            border-radius: 10px;
+            text-align: center;
+            cursor: pointer;
+            font-weight: 500;
+            transition: .2s;
+        }
+
+        .special-item:hover {
+            background: #2563eb;
+            color: white;
+        }
+
+        .dark .special-item {
+            background: #374151;
+        }
+        
+        .dark .special-item:hover {
+            background: #2563eb;
+        }
+
+        @media(max-width:768px) {
+            .navbar {
+                flex-direction: column;
+                gap: 10px;
+            }
+            .result-grid {
+                grid-template-columns: 1fr;
+            }
+            .result-card.expanded-box {
+                grid-column: span 1;
+            }
+        }
+
+        @media(max-width:480px) {
+            .action-buttons {
+                justify-content: center;
+                flex-direction: row; 
+                gap: 10px;
+            }
+            .btn-reset, .btn-special-inline {
+                width: auto;
+                flex-grow: 1; /* บนจอมือถือเล็กให้ขยายแชร์พื้นที่เท่ากันอย่างสวยงาม */
+                min-width: unset; /* ปลดล็อกความกว้างตายตัวบนมือถือ */
+                padding: 12px 16px;
+                font-size: 16px;
+            }
+            .special-grid-main {
+                grid-template-columns: 1fr;
+                gap: 10px;
+            }
+        }
