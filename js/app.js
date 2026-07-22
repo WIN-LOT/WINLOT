@@ -322,10 +322,11 @@ function get3Normal(digits){
     return result;
 }
 
+// 3 ตัวรวมหาม (รวม 3 ตัวตรง + หาม)
 function get3Ham(digits){
     const result = [];
 
-    // ตรง
+    // 3 ตัวตรง
     if (digits.length >= 3) {
         result.push(...get3Normal(digits));
     }
@@ -338,13 +339,19 @@ function get3Ham(digits){
         }
     }
 
-    return result;
+    return [...new Set(result)].sort();
 }
 
+// 3 ตัวรวมตองรวมหาม
 function get3All(digits){
     const result = [...get3Ham(digits)];
-    digits.forEach(n => { result.push(n + n + n); });
-    return result.sort();
+
+    // ตอง
+    digits.forEach(n=>{
+        result.push(n+n+n);
+    });
+
+    return [...new Set(result)].sort();
 }
 
 function buildSetHtml(labelName, itemsArray) {
