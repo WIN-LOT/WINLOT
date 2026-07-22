@@ -323,13 +323,22 @@ function get3Normal(digits){
 }
 
 function get3Ham(digits){
-    const pairs = get2Normal(digits);
     const result = [];
-    pairs.forEach(pair => {
-        const a = pair[0]; const b = pair[1];
-        result.push(a + a + b); result.push(a + b + b);
-    });
-    return result.sort();
+
+    // ตรง
+    if (digits.length >= 3) {
+        result.push(...get3Normal(digits));
+    }
+
+    // หาม
+    for(let i = 0; i < digits.length; i++){
+        for(let j = i + 1; j < digits.length; j++){
+            result.push(digits[i] + digits[i] + digits[j]); // AAB
+            result.push(digits[i] + digits[j] + digits[j]); // ABB
+        }
+    }
+
+    return result;
 }
 
 function get3All(digits){
